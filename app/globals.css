@@ -26,6 +26,29 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+/* flex min-h-screen flex-col items-center justify-between p-24 */
 .homepage {
-  
+  min-height: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  flex: auto;
+
+}
+.nav {
+  display: flex;  
+  flex-direction: row;
+  justify-content: space-between;
+}
+.title {
+  font-size: 60px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+button{
+  background-color: rgb(121, 143, 255);
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: black;
+  display: block;
+  margin: auto;
 }
