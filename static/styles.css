@@ -1,0 +1,62 @@
+
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+body {
+    background-color: black;
+    color: white;
+    padding: 20px;
+   
+}
+.nav {
+    display: flex;
+    justify-content: space-between;
+}
+h1 {
+    margin: 0;
+    font-size: 120px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(255, 232, 202)
+}
+
+ul {
+    list-style: none;
+}
+.player {
+    list-style: none;
+    padding: 20px;
+    display:block;
+    margin: 20px;
+    background-color: rgb(12, 76, 100);
+    border-radius: 5px;
+    font-size: 30px;
+}
+
+p {
+    font-size: 25px;
+}
+.name {
+    font-size: 70px;
+}
+
+.line-and-prop {
+    display: flex;
+    justify-content: space-between;
+}
+button {
+    outline: none;
+    border: none;
+    line-height: normal;
+    background-color:rgb(123, 220, 220);
+    padding: 10px 20px;
+    font-size: 40px;
+    display: block;
+    margin: auto;
+}
+button:hover {
+    cursor: pointer;
+}
+
+button:active {
+    background-color:rgba(123, 220, 220, 0.7);
+}

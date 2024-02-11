@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    
+    <div class="nav">
+        <h1 class="title" >NBA Wizard</h1>
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="basketball" width="150" height="150">
+    </div>
+    <p>We pick it you hit it!</p>
+    
+    <button id="getDataBtn">Fetch Recent Picks</button>
+
+    <ul class="data-holder" id="dataList"></ul>
+
+    <script>
+        $(document).ready(function() {
+            $('#getDataBtn').click(function() {
+                $.ajax({
+                    type: 'POST',
+                    url: '/get_data',
+                    success: function(response) {
+                        displayData(response);
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Error: ' + error);
+                    }
+                });
+            });
+
+            function displayData(data) {
+                $('#dataList').empty(); // Clear previous data
+                data.forEach(function(dictionary) {
+                    var listItem = $('<li>');
+                    var subList = $('<ul class="player">');
+                    subList.append('<li class="name">' + dictionary["name"] + '<li>')
+                    var playerdata = $('<ul class="line-and-prop">')
+                    playerdata.append('<li>' + dictionary["line"] + '</li>');
+                    playerdata.append('<li>' + dictionary["proptype"] + '</li>');
+                    subList.append(playerdata);
+                    subList.append('<li>' + dictionary["odds"] + '</li>');
+                    
+                    listItem.append(subList);
+                    $('#dataList').append(listItem);
+                });
+            }
+        });
+    </script>
+</body>
+
+
+</html>
