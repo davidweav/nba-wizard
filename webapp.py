@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, render_template, send_from_directory
+from betonline_scripts.find_matches import find_matches
 app = Flask(__name__)
 
-from utils.get_data import return_data
 @app.route('/')
 def index():
      return render_template('index.html')
@@ -11,7 +11,7 @@ def index():
 def get_data():
     # Call your function to retrieve the list of dictionaries
     print("test")
-    data = return_data()
+    data = find_matches()
     return jsonify(data)
 
 if __name__ == '__main__':

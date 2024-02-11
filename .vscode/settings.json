@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./betonline-scripts",
+        "./utils/betonline-scripts"
+    ]
+}
