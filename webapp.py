@@ -4,7 +4,7 @@ app = Flask(__name__)
 from utils.get_data import return_data
 @app.route('/')
 def index():
-    return render_template('index.html')
+     return render_template('index.html')
 
 
 @app.route('/get_data', methods=['POST'])
