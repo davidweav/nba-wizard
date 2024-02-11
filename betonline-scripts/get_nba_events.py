@@ -19,7 +19,7 @@ def fetch_nba_events(api_key):
     events_data = response.json()
     games_dictionary = {}
     eastern_timezone = pytz.timezone("US/Eastern")
-    print("HELLO")
+    print(url)
     try:
         current_time_utc = datetime.now(pytz.utc)
         for idx, event in enumerate(events_data):
