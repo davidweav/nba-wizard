@@ -3,7 +3,7 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 body {
-    background-color: black;
+    background-color: rgb(0, 18, 48);
     color: white;
     padding: 20px;
    
@@ -11,6 +11,8 @@ body {
 .nav {
     display: flex;
     justify-content: space-between;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgb(255, 232, 202);
 }
 h1 {
     margin: 0;
@@ -21,19 +23,27 @@ h1 {
 
 ul {
     list-style: none;
+    color: rgb(255, 232, 202)
 }
 .player {
     list-style: none;
     padding: 20px;
     display:block;
-    margin: 20px;
     background-color: rgb(12, 76, 100);
-    border-radius: 5px;
+    border-radius: 20px;
     font-size: 30px;
+    width: 40%;
+    margin: 20px auto;
+    transition: width 0.5s;
 }
 
+.player:hover{
+    width:80%;
+    transition: width 0.5s;
+}
 p {
-    font-size: 25px;
+    font-size: 40px;
+    color: rgb(255, 232, 202)
 }
 .name {
     font-size: 70px;
@@ -42,13 +52,16 @@ p {
 .line-and-prop {
     display: flex;
     justify-content: space-between;
+    font-size: 50px;
 }
 button {
     outline: none;
     border: none;
     line-height: normal;
-    background-color:rgb(123, 220, 220);
-    padding: 10px 20px;
+    background-color:rgb(255, 232, 202);
+    padding: 20px 40px;
+    margin-bottom: 50px;
+    border-radius: 20px;
     font-size: 40px;
     display: block;
     margin: auto;
