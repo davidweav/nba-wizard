@@ -1,5 +1,5 @@
-import get_nba_events as nbaE
-import get_nba_pp as nbaPP
+from betonline_scripts import get_nba_events as nbaE
+from betonline_scripts import get_nba_pp as nbaPP
 
 api_keys = ["a66b087a4628fe473a0d84cc8dd14533", "162e2c909f97655391e7fd98fcbaffdb", "c8e95f0047d9742ffbc3b8680892779c",
             "36aab4f1365caf620725f785b70db26a", "babd3fe7586d4ad29d3a4dabb0c74619", "35b4f6c81244ad6f6d5fcb31a2ed6186",

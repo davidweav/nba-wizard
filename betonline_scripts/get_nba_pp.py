@@ -18,6 +18,7 @@ def get_player_props_nba(event_id, player_odds_dict_nba, api_key):
     url_nba = f"https://api.the-odds-api.com/v4/sports/{sport_nba}/events/{event_id}/odds?apiKey={api_key}&regions={regions}&markets={markets_str}&oddsFormat={odds_format}&bookmakers={bookmaker_key}"
     url_williamhill = f"https://api.the-odds-api.com/v4/sports/{sport_nba}/events/{event_id}/odds?apiKey={api_key}&regions={regions}&markets={markets_str}&oddsFormat={odds_format}&bookmakers=williamhill_us"
 
+    print(url_nba)
     response = requests.get(url_nba)
     # print(url_nba)
     if response.status_code == 401:
@@ -31,45 +32,45 @@ def get_player_props_nba(event_id, player_odds_dict_nba, api_key):
             print("Request quoata has been reached for", api_key)
             return False
 
-    # try:
-    for market in player_props_data_nba['bookmakers'][0]['markets']:
-        market_key = market['key']
-        market_type = market_key.split('_')[1].capitalize()  # Assuming the format is always "player_{type}"
-        for outcome in market['outcomes']:
-            player_name = outcome['description']
-            over_odds = outcome['price'] if outcome['name'] == 'Over' else None
-            under_odds = outcome['price'] if outcome['name'] == 'Under' else None
-            line_value = outcome.get('point')  # Extract the line value
+    try:
+        for market in player_props_data_nba['bookmakers'][0]['markets']:
+            market_key = market['key']
+            market_type = market_key.split('_')[1].capitalize()  # Assuming the format is always "player_{type}"
+            for outcome in market['outcomes']:
+                player_name = outcome['description']
+                over_odds = outcome['price'] if outcome['name'] == 'Over' else None
+                under_odds = outcome['price'] if outcome['name'] == 'Under' else None
+                line_value = outcome.get('point')  # Extract the line value
 
-            if player_name in player_odds_dict_nba:
-                # Update existing values while preserving the existing ones
-                player_odds_dict_nba[player_name][market_type]["Over"] = over_odds if over_odds is not None else player_odds_dict_nba[player_name][market_type]["Over"]
-                player_odds_dict_nba[player_name][market_type]["Under"] = under_odds if under_odds is not None else player_odds_dict_nba[player_name][market_type]["Under"]
-                player_odds_dict_nba[player_name][market_type]["Line"] = line_value  # Include the line value
-            else:
-                # Create a new entry in the dictionary
-                player_odds_dict_nba[player_name] = {
-                    "Points": {"Over": None, "Under": None, "Line": None},
-                    "Rebounds": {"Over": None, "Under": None, "Line": None},
-                    "Assists": {"Over": None, "Under": None, "Line": None},
-                    "PointsReboundsAssists": {"Over": None, "Under": None, "Line": None},
-                    "Threes": {"Over": None, "Under": None, "Line": None}
-                }
-                # Update odds values based on the market
-                player_odds_dict_nba[player_name][market_type]["Over"] = over_odds
-                player_odds_dict_nba[player_name][market_type]["Under"] = under_odds
-                player_odds_dict_nba[player_name][market_type]["Line"] = line_value
-    # except Exception as e:
-    #     print(e)
-    #     return False
+                if player_name in player_odds_dict_nba:
+                    # Update existing values while preserving the existing ones
+                    player_odds_dict_nba[player_name][market_type]["Over"] = over_odds if over_odds is not None else player_odds_dict_nba[player_name][market_type]["Over"]
+                    player_odds_dict_nba[player_name][market_type]["Under"] = under_odds if under_odds is not None else player_odds_dict_nba[player_name][market_type]["Under"]
+                    player_odds_dict_nba[player_name][market_type]["Line"] = line_value  # Include the line value
+                else:
+                    # Create a new entry in the dictionary
+                    player_odds_dict_nba[player_name] = {
+                        "Points": {"Over": None, "Under": None, "Line": None},
+                        "Rebounds": {"Over": None, "Under": None, "Line": None},
+                        "Assists": {"Over": None, "Under": None, "Line": None},
+                        "PointsReboundsAssists": {"Over": None, "Under": None, "Line": None},
+                        "Threes": {"Over": None, "Under": None, "Line": None}
+                    }
+                    # Update odds values based on the market
+                    player_odds_dict_nba[player_name][market_type]["Over"] = over_odds
+                    player_odds_dict_nba[player_name][market_type]["Under"] = under_odds
+                    player_odds_dict_nba[player_name][market_type]["Line"] = line_value
+    except Exception as e:
+        print(e)
+        return True
 
 def fetch_nba_pp(api_key):
     player_odds_dict_nba = {}
 
     current_date = datetime.now().strftime("%Y-%m-%d")
 
-    input_file_path_nba = f"betonline-scripts/events/nba_games_{current_date}.json"
-    output_csv_file_path_nba = f"betonline-scripts/playerOdds/nba_player_odds_{current_date}.csv"
+    input_file_path_nba = f"betonline_scripts/events/nba_games_{current_date}.json"
+    output_csv_file_path_nba = f"betonline_scripts/betonline-odds/nba_player_odds_{current_date}.csv"
 
     with open(input_file_path_nba, "r") as json_file_nba:
         games_info_nba = json.load(json_file_nba)

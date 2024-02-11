@@ -1,10 +1,10 @@
 import pandas as pd
-# import fetch_betonline_odds
-# import scrape_underdogs
+from betonline_scripts import fetch_betonline_odds
+from betonline_scripts import scrape_underdogs
 
 def get_odds_and_lines():
-    # fetch_betonline_odds()
-    # scrape_underdogs()
+    fetch_betonline_odds()
+    scrape_underdogs()
     None
 
 def find_matches():

@@ -1,5 +1,5 @@
 import requests
-from datetime import datetime
+from datetime import datetime, time
 import pytz
 import json
 import argparse
@@ -8,9 +8,8 @@ def fetch_nba_events(api_key):
     base_url = "https://api.the-odds-api.com/v4"
     sport = "basketball_nba"  # Adjust the sport based on the desired basketball league
     regions = "us"
-
     url = f"{base_url}/sports/{sport}/odds/?apiKey={api_key}&regions={regions}"
-    # print(url)
+    print(url)
 
     response = requests.get(url)
     if response.status_code == 401:
@@ -19,7 +18,7 @@ def fetch_nba_events(api_key):
     events_data = response.json()
     games_dictionary = {}
     eastern_timezone = pytz.timezone("US/Eastern")
-    print(url)
+    # print(url)
     try:
         current_time_utc = datetime.now(pytz.utc)
         for idx, event in enumerate(events_data):
@@ -32,9 +31,11 @@ def fetch_nba_events(api_key):
                 
                 # Convert to Eastern Time
                 commence_datetime_et = commence_datetime.astimezone(eastern_timezone)
+                current_time_et = datetime.now(eastern_timezone).time()
 
-                print(commence_datetime_et.date(), current_date)
-                if commence_datetime_et > current_time_utc and commence_datetime_et.date() == current_date:
+                current_time_decimal = current_time_et.hour + current_time_et.minute / 60 + current_time_et.second / 3600
+                time = (current_time_et.hour + (current_time_et.minute / 60)) > 21
+                if (current_time_et.hour + (current_time_et.minute / 60) > 21.0) or (commence_datetime_et > current_time_et and commence_datetime_et.date() == current_date):
                     formatted_date = commence_datetime_et.strftime("%Y-%m-%d")
                     formatted_time = commence_datetime_et.strftime("%H:%M:%S")
 
@@ -46,7 +47,7 @@ def fetch_nba_events(api_key):
                     }
 
         current_date = datetime.now().strftime("%Y-%m-%d")
-        with open(f"betonline-scripts/events/nba_games_{current_date}.json", "w") as json_file:
+        with open(f"betonline_scripts/events/nba_games_{current_date}.json", "w") as json_file:
             json.dump(games_dictionary, json_file, indent=2)
 
         return True
