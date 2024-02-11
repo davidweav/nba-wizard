@@ -5,22 +5,19 @@ import json
 import argparse
 
 def fetch_nba_events(api_key):
+    games = {}
     base_url = "https://api.the-odds-api.com/v4"
     sport = "basketball_nba"  # Adjust the sport based on the desired basketball league
     regions = "us"
     url = f"{base_url}/sports/{sport}/odds/?apiKey={api_key}&regions={regions}"
-    print(url)
-
+    # print(url)
     response = requests.get(url)
-    if response.status_code == 401:
+    if response.status_code == 401: # this api key is out of uses
         print("Request quoata has been reached for", api_key)
         return False
     events_data = response.json()
-    games_dictionary = {}
     eastern_timezone = pytz.timezone("US/Eastern")
-    # print(url)
     try:
-        current_time_utc = datetime.now(pytz.utc)
         for idx, event in enumerate(events_data):
             event_id = event.get("id")
             commence_time_str = event.get("commence_time")
@@ -28,18 +25,24 @@ def fetch_nba_events(api_key):
 
             if event_id and commence_time_str and teams:
                 commence_datetime = datetime.fromisoformat(commence_time_str.replace("Z", "+00:00"))
-                
-                # Convert to Eastern Time
+                print("Commence Time:", commence_datetime)
                 commence_datetime_et = commence_datetime.astimezone(eastern_timezone)
-                current_time_et = datetime.now(eastern_timezone).time()
-
-                current_time_decimal = current_time_et.hour + current_time_et.minute / 60 + current_time_et.second / 3600
-                time = (current_time_et.hour + (current_time_et.minute / 60)) > 21
-                if (current_time_et.hour + (current_time_et.minute / 60) > 21.0) or (commence_datetime_et > current_time_et and commence_datetime_et.date() == current_date):
+                print("Commence Time ET:", commence_datetime_et)
+                current_datetime_et = datetime.now(eastern_timezone)
+                print("Current datetime et:", current_datetime_et)
+                nine_pm_today = datetime.now(eastern_timezone).replace(hour=21, minute=0, second=0, microsecond=0)
+                print("9pm datetime:",nine_pm_today)
+                var = current_datetime_et > nine_pm_today
+                print("Current time > 9pm:", var)
+                var2 = commence_datetime_et.time() > current_datetime_et.time()
+                print("Commence time > current time", var2, commence_datetime_et.time(), current_datetime_et.time())
+                var3 = commence_datetime_et.date() == current_datetime_et.date()
+                print("Commence time date == current time date:", var3, commence_datetime_et.date(), current_datetime_et.date())
+                if (current_datetime_et > nine_pm_today) or (commence_datetime_et.time() > current_datetime_et.time() and commence_datetime_et.date() == current_datetime_et.date()):
                     formatted_date = commence_datetime_et.strftime("%Y-%m-%d")
                     formatted_time = commence_datetime_et.strftime("%H:%M:%S")
 
-                    games_dictionary[idx] = {
+                    games[idx] = {
                         "event_id": event_id,
                         "date": formatted_date,
                         "time": formatted_time,
@@ -48,18 +51,8 @@ def fetch_nba_events(api_key):
 
         current_date = datetime.now().strftime("%Y-%m-%d")
         with open(f"betonline_scripts/events/nba_games_{current_date}.json", "w") as json_file:
-            json.dump(games_dictionary, json_file, indent=2)
+            json.dump(games, json_file, indent=2)
 
         return True
     except Exception as e:
         return False
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--api_key", help="Your API key for The Odds API")
-    args = parser.parse_args()
-
-    if args.api_key:
-        fetch_nba_events(args.api_key)
-    else:
-        print("Please provide your API key using the --api_key argument.")

@@ -1,0 +1,20 @@
+{
+  "0": {
+    "event_id": "04a4ea52daa7aa07eb08e449ed7f3e92",
+    "date": "2024-02-11",
+    "time": "14:10:00",
+    "teams": [
+      "Miami Heat",
+      "Boston Celtics"
+    ]
+  },
+  "1": {
+    "event_id": "a6f1760e3161a37be5747185f731a971",
+    "date": "2024-02-11",
+    "time": "15:10:00",
+    "teams": [
+      "Oklahoma City Thunder",
+      "Sacramento Kings"
+    ]
+  }
+}

@@ -1,17 +1,18 @@
 import pandas as pd
 from betonline_scripts import fetch_betonline_odds
 from betonline_scripts import scrape_underdogs
+from datetime import datetime
 
 def get_odds_and_lines():
-    fetch_betonline_odds()
-    scrape_underdogs()
+    fetch_betonline_odds.get_betonline_odds()
+    scrape_underdogs.do_logic()
     None
 
 def find_matches():
-
+    current_date = datetime.now().strftime("%Y-%m-%d")
     try:
-        df1 = pd.read_csv('betonline_scripts/betonline-odds/nba_player_odds_2024-02-10.csv')
-        df2 = pd.read_csv('betonline_scripts/underdog-lines/player_data_2024-02-10.csv')
+        df1 = pd.read_csv(f'betonline_scripts/betonline-odds/nba_player_odds_{current_date}.csv')
+        df2 = pd.read_csv(f'betonline_scripts/underdog-lines/player_data_{current_date}.csv')
     except KeyError as e:
         print(f"Missing column: {e}")
         exit()
