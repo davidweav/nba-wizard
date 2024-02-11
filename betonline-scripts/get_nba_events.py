@@ -46,7 +46,7 @@ def fetch_nba_events(api_key):
                     }
 
         current_date = datetime.now().strftime("%Y-%m-%d")
-        with open(f"events/nba_games_{current_date}.json", "w") as json_file:
+        with open(f"betonline-scripts/events/nba_games_{current_date}.json", "w") as json_file:
             json.dump(games_dictionary, json_file, indent=2)
 
         return True

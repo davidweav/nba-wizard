@@ -68,8 +68,8 @@ def fetch_nba_pp(api_key):
 
     current_date = datetime.now().strftime("%Y-%m-%d")
 
-    input_file_path_nba = f"events/nba_games_{current_date}.json"
-    output_csv_file_path_nba = f"playerOdds/nba_player_odds_{current_date}.csv"
+    input_file_path_nba = f"betonline-scripts/events/nba_games_{current_date}.json"
+    output_csv_file_path_nba = f"betonline-scripts/playerOdds/nba_player_odds_{current_date}.csv"
 
     with open(input_file_path_nba, "r") as json_file_nba:
         games_info_nba = json.load(json_file_nba)

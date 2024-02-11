@@ -1,5 +1,9 @@
-import csv
 import pandas as pd
+import fetch_betonline_odds
+import scrape_underdogs
+
+fetch_betonline_odds()
+scrape_underdogs()
 
 try:
     df1 = pd.read_csv('betonline-scripts/betonline-odds/nba_player_odds_2024-02-10.csv')
@@ -44,6 +48,6 @@ for index, row1 in df1.iterrows():
                             'type': odds_string
                         })
                 else:
-                    print(f"Warning: Missing data for {player_name} in one or both dataframes.")
+                    None # no data to compare
 
 print(matching_lines)

@@ -33,8 +33,8 @@ def print_odds_between_range(player_odds_data):
         print(f"{player:<20} {market_type:<20} {line_value:<10} {odds_value}")
 
 # File path for the NHL CSV file
-csv_file_path_nhl = f"playerOdds/nhl_player_odds_{current_date}.csv"
-csv_file_path_nba = f"playerOdds/nba_player_odds_{current_date}.csv"
+csv_file_path_nhl = f"betonline-scripts/betonline_odds/nhl_player_odds_{current_date}.csv"
+csv_file_path_nba = f"betonline-scripts/betonline_odds/nba_player_odds_{current_date}.csv"
 
 # Read player odds data from the NHL CSV file
 player_odds_data_nhl = read_player_odds_data(csv_file_path_nhl)

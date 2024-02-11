@@ -55,7 +55,7 @@ def find_player_and_props(driver, player_prop_div):
 
 def write_to_csv(data):
     current_date = datetime.now().strftime("%Y-%m-%d")
-    csv_file_path = f'underdog-lines/player_data_{current_date}.csv'
+    csv_file_path = f'betonline-scripts/underdog-lines/player_data_{current_date}.csv'
     directory = os.path.dirname(csv_file_path)
     if not os.path.exists(directory):
         os.makedirs(directory)
