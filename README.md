@@ -11,7 +11,7 @@ NBA Wizard helps you make smarter, more informed bets based on statistics
 
 Python, Flask, Html, CSS
 
-# Problems We Ran Inot
+# Problems We Ran In to
 
 Getting Flask to work and working with date time in python
 
