@@ -45,12 +45,14 @@ def find_matches():
                                 odds_value = row1[prop + '_Under']
                                 odds_string = 'Under'
                             # Save the matching lines along with corresponding 'Over' and 'Under' values from df1
+                            implied_probability = round(abs(odds_value) / (abs(odds_value) + 100) * 100, 3)
                             matching_lines.append({
                                 'name': player_name,
                                 'proptype': prop,
                                 'line': prop_line_df1,
                                 'odds': odds_value,
-                                'type': odds_string
+                                'type': odds_string,
+                                'implied_probability': implied_probability
                             })
                     else:
                         None # no data to compare
