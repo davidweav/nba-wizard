@@ -12,13 +12,15 @@ import csv
 from datetime import datetime
 
 def login(driver):
+    username = ""
+    password = ""
     driver.get("https://underdogfantasy.com/pick-em/higher-lower/all/nba")
     driver.maximize_window()
     time.sleep(3)
     email_input = driver.find_element(By.CSS_SELECTOR, '.styles__field__Q6LKF [data-testid="email_input"]')
-    email_input.send_keys("adamruehle@live.com")
+    email_input.send_keys(username)
     password_input = driver.find_element(By.CSS_SELECTOR, '.styles__field__Q6LKF [data-testid="password_input"]')
-    password_input.send_keys("mT4zt2sJaYT88BPb@KG!WG_YK")
+    password_input.send_keys(password)
     sign_in_button = driver.find_element(By.CSS_SELECTOR, '[data-testid="sign-in-button"]')
     sign_in_button.click()
     time.sleep(2)
