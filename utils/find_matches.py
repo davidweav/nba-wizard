@@ -37,6 +37,7 @@ def find_matches():
                     # Check if any required value is missing
                     if pd.notna(prop_line_df1) and pd.notna(prop_line_df2):
                         # Remove the possible 's' from underdogs prop
+                        is_underdog_prop_scorcher = False
                         if 's' in str(prop_line_df2):
                             prop_line_df2 = prop_line_df2[:-1]
                             is_underdog_prop_scorcher = True
@@ -51,7 +52,7 @@ def find_matches():
                                 if is_underdog_prop_scorcher:
                                     continue
                             # Save the matching lines along with corresponding 'Over' and 'Under' values from df1
-                            implied_probability = round(abs(odds_value) / (abs(odds_value) + 100) * 100, 3)
+                            implied_probability = round(abs(odds_value) / (abs(odds_value) + 100) * 100, 2)
                             matching_lines.append({
                                 'name': player_name,
                                 'proptype': prop,

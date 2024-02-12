@@ -77,8 +77,6 @@ def find_player_and_props(driver, player_prop_div):
             if button.text == "Lower":
                 has_scorcher_button = False
                 break
-        if has_scorcher_button:
-            print("Scorcher button found: ", player_name, prop, value)
         props.append({'prop': prop, 'has_scorcher_button': has_scorcher_button})
     
     return player_name, props
