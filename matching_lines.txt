@@ -1,157 +1,10 @@
 [
   {
-    "name": "Jonas Valanciunas",
-    "proptype": "Threes",
-    "line": 0.5,
-    "odds": -554.0,
-    "type": "Under"
-  },
-  {
-    "name": "Paul Reed",
-    "proptype": "Threes",
-    "line": 0.5,
-    "odds": -479.0,
-    "type": "Under"
-  },
-  {
-    "name": "Amen Thompson",
-    "proptype": "Threes",
-    "line": 0.5,
-    "odds": -294.0,
-    "type": "Under"
-  },
-  {
-    "name": "Alperen Sengun",
-    "proptype": "Threes",
-    "line": 0.5,
-    "odds": -264.0,
-    "type": "Under"
-  },
-  {
-    "name": "Evan Mobley",
-    "proptype": "Threes",
-    "line": 0.5,
-    "odds": -254.0,
-    "type": "Under"
-  },
-  {
-    "name": "Tobias Harris",
-    "proptype": "Threes",
-    "line": 1.5,
-    "odds": -224.0,
-    "type": "Under"
-  },
-  {
-    "name": "Julian Champagnie",
-    "proptype": "Threes",
-    "line": 1.5,
-    "odds": -224.0,
-    "type": "Under"
-  },
-  {
-    "name": "Bobby Portis",
-    "proptype": "Threes",
-    "line": 1.5,
-    "odds": -214.0,
-    "type": "Under"
-  },
-  {
-    "name": "Brandon Ingram",
-    "proptype": "Threes",
-    "line": 1.5,
-    "odds": -214.0,
-    "type": "Under"
-  },
-  {
-    "name": "Vince Williams Jr.",
-    "proptype": "Threes",
-    "line": 2.5,
-    "odds": -194.0,
-    "type": "Under"
-  },
-  {
-    "name": "Jaren Jackson Jr.",
-    "proptype": "Threes",
-    "line": 2.5,
-    "odds": -189.0,
-    "type": "Under"
-  },
-  {
-    "name": "John Collins",
-    "proptype": "Threes",
-    "line": 1.5,
-    "odds": -184.0,
-    "type": "Under"
-  },
-  {
-    "name": "Aaron Nesmith",
-    "proptype": "Threes",
-    "line": 2.5,
-    "odds": -179.0,
-    "type": "Under"
-  },
-  {
-    "name": "Caris LeVert",
-    "proptype": "Threes",
-    "line": 1.5,
-    "odds": -179.0,
-    "type": "Under"
-  },
-  {
-    "name": "Nikola Jokic",
-    "proptype": "Threes",
-    "line": 1.5,
-    "odds": -174.0,
-    "type": "Under"
-  },
-  {
-    "name": "Gary Trent Jr.",
-    "proptype": "Threes",
-    "line": 2.5,
-    "odds": -169.0,
-    "type": "Under"
-  },
-  {
-    "name": "Donovan Mitchell",
-    "proptype": "Rebounds",
-    "line": 4.5,
-    "odds": -151.0,
-    "type": "Over"
-  },
-  {
-    "name": "Derrick Jones Jr.",
-    "proptype": "Rebounds",
-    "line": 4.5,
-    "odds": -151.0,
-    "type": "Under"
-  },
-  {
-    "name": "Maxi Kleber",
-    "proptype": "Rebounds",
-    "line": 4.5,
-    "odds": -151.0,
-    "type": "Over"
-  },
-  {
-    "name": "Andrew Nembhard",
-    "proptype": "Assists",
-    "line": 4.5,
-    "odds": -145.0,
-    "type": "Under"
-  },
-  {
     "name": "Josh Hart",
     "proptype": "Rebounds",
     "line": 8.5,
     "odds": -145.0,
     "type": "Over"
-  },
-  {
-    "name": "Vince Williams Jr.",
-    "proptype": "Assists",
-    "line": 4.5,
-    "odds": -145.0,
-    "type": "Under"
   },
   {
     "name": "Pascal Siakam",
@@ -168,13 +21,6 @@
     "type": "Over"
   },
   {
-    "name": "Trae Young",
-    "proptype": "Rebounds",
-    "line": 2.5,
-    "odds": -142.0,
-    "type": "Over"
-  },
-  {
     "name": "Josh Hart",
     "proptype": "Assists",
     "line": 4.5,
@@ -182,25 +28,18 @@
     "type": "Over"
   },
   {
-    "name": "Josh Green",
-    "proptype": "Threes",
-    "line": 1.5,
-    "odds": -142.0,
-    "type": "Under"
-  },
-  {
-    "name": "Jordan Clarkson",
-    "proptype": "Threes",
-    "line": 1.5,
+    "name": "Maxi Kleber",
+    "proptype": "Rebounds",
+    "line": 4.5,
     "odds": -142.0,
     "type": "Over"
   },
   {
-    "name": "Saddiq Bey",
-    "proptype": "Rebounds",
-    "line": 6.5,
-    "odds": -139.0,
-    "type": "Under"
+    "name": "Luka Doncic",
+    "proptype": "Assists",
+    "line": 9.5,
+    "odds": -142.0,
+    "type": "Over"
   },
   {
     "name": "Tyus Jones",
@@ -210,38 +49,10 @@
     "type": "Over"
   },
   {
-    "name": "Brandin Podziemski",
-    "proptype": "Assists",
-    "line": 4.5,
-    "odds": -139.0,
-    "type": "Over"
-  },
-  {
-    "name": "James Harden",
-    "proptype": "Threes",
-    "line": 2.5,
-    "odds": -139.0,
-    "type": "Over"
-  },
-  {
-    "name": "Tre Mann",
+    "name": "Collin Sexton",
     "proptype": "Assists",
     "line": 5.5,
-    "odds": -137.0,
-    "type": "Under"
-  },
-  {
-    "name": "Kentavious Caldwell-Pope",
-    "proptype": "Rebounds",
-    "line": 2.5,
-    "odds": -137.0,
-    "type": "Under"
-  },
-  {
-    "name": "Deni Avdija",
-    "proptype": "Assists",
-    "line": 3.5,
-    "odds": -137.0,
+    "odds": -139.0,
     "type": "Over"
   }
 ]

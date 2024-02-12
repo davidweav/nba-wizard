@@ -36,6 +36,10 @@ def find_matches():
                     
                     # Check if any required value is missing
                     if pd.notna(prop_line_df1) and pd.notna(prop_line_df2):
+                        # Remove the possible 's' from underdogs prop
+                        if 's' in str(prop_line_df2):
+                            prop_line_df2 = prop_line_df2[:-1]
+                            is_underdog_prop_scorcher = True
                         # Compare the property lines between df1 and df2
                         if prop_line_df1 == prop_line_df2:
                             if row1[prop + '_Over'] < row1[prop + '_Under']:
@@ -44,6 +48,8 @@ def find_matches():
                             else:
                                 odds_value = row1[prop + '_Under']
                                 odds_string = 'Under'
+                                if is_underdog_prop_scorcher:
+                                    continue
                             # Save the matching lines along with corresponding 'Over' and 'Under' values from df1
                             matching_lines.append({
                                 'name': player_name,
