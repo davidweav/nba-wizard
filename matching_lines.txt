@@ -1,58 +1,298 @@
 [
   {
+    "name": "Jonas Valanciunas",
+    "proptype": "Threes",
+    "line": 0.5,
+    "odds": -554.0,
+    "type": "Under",
+    "implied_probability": 84.709
+  },
+  {
+    "name": "Paul Reed",
+    "proptype": "Threes",
+    "line": 0.5,
+    "odds": -479.0,
+    "type": "Under",
+    "implied_probability": 82.729
+  },
+  {
+    "name": "Amen Thompson",
+    "proptype": "Threes",
+    "line": 0.5,
+    "odds": -294.0,
+    "type": "Under",
+    "implied_probability": 74.619
+  },
+  {
+    "name": "Alperen Sengun",
+    "proptype": "Threes",
+    "line": 0.5,
+    "odds": -264.0,
+    "type": "Under",
+    "implied_probability": 72.527
+  },
+  {
+    "name": "Evan Mobley",
+    "proptype": "Threes",
+    "line": 0.5,
+    "odds": -254.0,
+    "type": "Under",
+    "implied_probability": 71.751
+  },
+  {
+    "name": "Julian Champagnie",
+    "proptype": "Threes",
+    "line": 1.5,
+    "odds": -224.0,
+    "type": "Under",
+    "implied_probability": 69.136
+  },
+  {
+    "name": "Tobias Harris",
+    "proptype": "Threes",
+    "line": 1.5,
+    "odds": -214.0,
+    "type": "Under",
+    "implied_probability": 68.153
+  },
+  {
+    "name": "Bobby Portis",
+    "proptype": "Threes",
+    "line": 1.5,
+    "odds": -214.0,
+    "type": "Under",
+    "implied_probability": 68.153
+  },
+  {
+    "name": "Brandon Ingram",
+    "proptype": "Threes",
+    "line": 1.5,
+    "odds": -214.0,
+    "type": "Under",
+    "implied_probability": 68.153
+  },
+  {
+    "name": "Vince Williams Jr.",
+    "proptype": "Threes",
+    "line": 2.5,
+    "odds": -194.0,
+    "type": "Under",
+    "implied_probability": 65.986
+  },
+  {
+    "name": "Jaren Jackson Jr.",
+    "proptype": "Threes",
+    "line": 2.5,
+    "odds": -189.0,
+    "type": "Under",
+    "implied_probability": 65.398
+  },
+  {
+    "name": "John Collins",
+    "proptype": "Threes",
+    "line": 1.5,
+    "odds": -184.0,
+    "type": "Under",
+    "implied_probability": 64.789
+  },
+  {
+    "name": "Aaron Nesmith",
+    "proptype": "Threes",
+    "line": 2.5,
+    "odds": -179.0,
+    "type": "Under",
+    "implied_probability": 64.158
+  },
+  {
+    "name": "Caris LeVert",
+    "proptype": "Threes",
+    "line": 1.5,
+    "odds": -179.0,
+    "type": "Under",
+    "implied_probability": 64.158
+  },
+  {
+    "name": "Nikola Jokic",
+    "proptype": "Threes",
+    "line": 1.5,
+    "odds": -174.0,
+    "type": "Under",
+    "implied_probability": 63.504
+  },
+  {
+    "name": "Scottie Barnes",
+    "proptype": "Threes",
+    "line": 1.5,
+    "odds": -169.0,
+    "type": "Under",
+    "implied_probability": 62.825
+  },
+  {
+    "name": "Gary Trent Jr.",
+    "proptype": "Threes",
+    "line": 2.5,
+    "odds": -169.0,
+    "type": "Under",
+    "implied_probability": 62.825
+  },
+  {
+    "name": "Damian Lillard",
+    "proptype": "Threes",
+    "line": 3.5,
+    "odds": -169.0,
+    "type": "Under",
+    "implied_probability": 62.825
+  },
+  {
+    "name": "Maxi Kleber",
+    "proptype": "Rebounds",
+    "line": 4.5,
+    "odds": -151.0,
+    "type": "Over",
+    "implied_probability": 60.159
+  },
+  {
+    "name": "Andrew Nembhard",
+    "proptype": "Assists",
+    "line": 4.5,
+    "odds": -145.0,
+    "type": "Under",
+    "implied_probability": 59.184
+  },
+  {
+    "name": "Miles Bridges",
+    "proptype": "Rebounds",
+    "line": 7.5,
+    "odds": -145.0,
+    "type": "Under",
+    "implied_probability": 59.184
+  },
+  {
     "name": "Josh Hart",
     "proptype": "Rebounds",
     "line": 8.5,
     "odds": -145.0,
-    "type": "Over"
+    "type": "Over",
+    "implied_probability": 59.184
+  },
+  {
+    "name": "Vince Williams Jr.",
+    "proptype": "Assists",
+    "line": 4.5,
+    "odds": -145.0,
+    "type": "Under",
+    "implied_probability": 59.184
   },
   {
     "name": "Pascal Siakam",
     "proptype": "Assists",
     "line": 3.5,
     "odds": -142.0,
-    "type": "Over"
+    "type": "Over",
+    "implied_probability": 58.678
   },
   {
     "name": "Trae Young",
     "proptype": "Assists",
     "line": 10.5,
     "odds": -142.0,
-    "type": "Over"
+    "type": "Over",
+    "implied_probability": 58.678
+  },
+  {
+    "name": "Trae Young",
+    "proptype": "Rebounds",
+    "line": 2.5,
+    "odds": -142.0,
+    "type": "Over",
+    "implied_probability": 58.678
   },
   {
     "name": "Josh Hart",
     "proptype": "Assists",
     "line": 4.5,
     "odds": -142.0,
-    "type": "Over"
+    "type": "Over",
+    "implied_probability": 58.678
   },
   {
     "name": "Maxi Kleber",
     "proptype": "Rebounds",
     "line": 4.5,
     "odds": -142.0,
-    "type": "Over"
+    "type": "Under",
+    "implied_probability": 58.678
   },
   {
     "name": "Luka Doncic",
     "proptype": "Assists",
     "line": 9.5,
     "odds": -142.0,
-    "type": "Over"
+    "type": "Over",
+    "implied_probability": 58.678
+  },
+  {
+    "name": "Saddiq Bey",
+    "proptype": "Rebounds",
+    "line": 6.5,
+    "odds": -139.0,
+    "type": "Under",
+    "implied_probability": 58.159
   },
   {
     "name": "Tyus Jones",
     "proptype": "Assists",
     "line": 7.5,
     "odds": -139.0,
-    "type": "Over"
+    "type": "Over",
+    "implied_probability": 58.159
   },
   {
     "name": "Collin Sexton",
     "proptype": "Assists",
-    "line": 5.5,
+    "line": 4.5,
     "odds": -139.0,
-    "type": "Over"
+    "type": "Over",
+    "implied_probability": 58.159
+  },
+  {
+    "name": "James Harden",
+    "proptype": "Threes",
+    "line": 2.5,
+    "odds": -139.0,
+    "type": "Over",
+    "implied_probability": 58.159
+  },
+  {
+    "name": "Tre Mann",
+    "proptype": "Assists",
+    "line": 5.5,
+    "odds": -137.0,
+    "type": "Under",
+    "implied_probability": 57.806
+  },
+  {
+    "name": "Kelly Olynyk",
+    "proptype": "Threes",
+    "line": 0.5,
+    "odds": -137.0,
+    "type": "Under",
+    "implied_probability": 57.806
+  },
+  {
+    "name": "Kentavious Caldwell-Pope",
+    "proptype": "Rebounds",
+    "line": 2.5,
+    "odds": -137.0,
+    "type": "Under",
+    "implied_probability": 57.806
+  },
+  {
+    "name": "Deni Avdija",
+    "proptype": "Assists",
+    "line": 3.5,
+    "odds": -137.0,
+    "type": "Over",
+    "implied_probability": 57.806
   }
 ]

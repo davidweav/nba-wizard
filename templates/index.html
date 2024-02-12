@@ -16,12 +16,10 @@
     <div class="button-row">
         <button class="nav-button" id="getDataBtn">Fetch & Display Odds and Picks</button>
     </div>
-    
     <div class="button-row">
         <button class="nav-button" id="getBetOnlineOddsBtn">Fetch BetOnline Odds</button>
         <button class="nav-button" id="getUnderdogOddsBtn">Fetch Underdog Odds</button>
     </div>
-    
     <div class="button-row">
         <button class="nav-button" id="displayOddsAndPicksBtn">Display Odds and Picks</button>
     </div>
@@ -86,8 +84,9 @@
                     playerdata.append('<li>' + dictionary["line"] + '</li>');
                     playerdata.append('<li>' + dictionary["proptype"] + '</li>');
                     playerdata.append('<li>' + dictionary["type"] + '</li>');
+                    playerdata.append('<li>' + dictionary["odds"] + '</li>');
                     subList.append(playerdata);
-                    subList.append('<li>' + dictionary["odds"] + '</li>');
+                    subList.append('<li class="implied-prob">' + dictionary["implied_probability"] + "% chance of hitting..." + '</li>');
                     
                     listItem.append(subList);
                     $('#dataList').append(listItem);
