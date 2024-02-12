@@ -12,8 +12,8 @@ import csv
 from datetime import datetime
 
 def login(driver):
-    username = ""
-    password = ""
+    username = "adamruehle@live.com"
+    password = "sLEyC6P2v_KhZmG6.eV6xVUy4VqCnc"
     driver.get("https://underdogfantasy.com/pick-em/higher-lower/all/nba")
     driver.maximize_window()
     time.sleep(3)
@@ -62,7 +62,7 @@ def write_to_csv(data):
     unique_props = list(set(all_props))
     # Define fieldnames including 'Name' and unique properties
     fieldnames = ['Name'] + unique_props
-    with open(csv_file_path, 'a', newline='') as csvfile:
+    with open(csv_file_path, 'w', newline='') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         if csvfile.tell() == 0:
             writer.writeheader()
@@ -79,7 +79,7 @@ def do_logic():
     # options.add_argument("--headless")
     options.add_argument("--log-level=3")
     options.add_argument("--disable-logging")
-    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     login(driver)
     player_prop_divs_containers = WebDriverWait(driver, 10).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, "div.styles__content___R51k")))
     player_prop_divs = []
