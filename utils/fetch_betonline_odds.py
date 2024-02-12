@@ -1,5 +1,5 @@
-from betonline_scripts import get_nba_events as nbaE
-from betonline_scripts import get_nba_pp as nbaPP
+from utils import get_nba_events as nbaE
+from utils import get_nba_pp as nbaPP
 
 def get_betonline_odds():
     api_keys = ["a66b087a4628fe473a0d84cc8dd14533", "162e2c909f97655391e7fd98fcbaffdb", "c8e95f0047d9742ffbc3b8680892779c",

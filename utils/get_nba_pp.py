@@ -90,7 +90,7 @@ def fetch_nba_pp(api_key):
                 column_name_nba = f"{prop_type_nba}_{over_under_nba}"
                 prop_types_nba.add(column_name_nba)
 
-    with open(output_csv_file_path_nba, "w") as csv_file_nba:
+    with open(output_csv_file_path_nba, "w", newline='') as csv_file_nba:
         writer_nba = csv.DictWriter(csv_file_nba, fieldnames=["Player"] + sorted(prop_types_nba))
         
         # Write headers

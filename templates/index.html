@@ -13,7 +13,18 @@
     </div>
     <p>We pick it you hit it!</p>
     
-    <button id="getDataBtn">Fetch Recent Picks</button>
+    <div class="button-row">
+        <button class="nav-button" id="getDataBtn">Fetch & Display Odds and Picks</button>
+    </div>
+    
+    <div class="button-row">
+        <button class="nav-button" id="getBetOnlineOddsBtn">Fetch BetOnline Odds</button>
+        <button class="nav-button" id="getUnderdogOddsBtn">Fetch Underdog Odds</button>
+    </div>
+    
+    <div class="button-row">
+        <button class="nav-button" id="displayOddsAndPicksBtn">Display Odds and Picks</button>
+    </div>
 
     <ul class="data-holder" id="dataList"></ul>
 
@@ -32,6 +43,39 @@
                 });
             });
 
+            $('#getBetOnlineOddsBtn').click(function() {
+                $.ajax({
+                    type: 'POST',
+                    url: '/get_betonline_odds',
+                    error: function(xhr, status, error) {
+                        alert('Error: ' + error);
+                    }
+                });
+            });
+
+            $('#getUnderdogOddsBtn').click(function() {
+                $.ajax({
+                    type: 'POST',
+                    url: '/get_underdog_odds',
+                    error: function(xhr, status, error) {
+                        alert('Error: ' + error);
+                    }
+                });
+            });
+
+            $('#displayOddsAndPicksBtn').click(function() {
+                $.ajax({
+                    type: 'POST',
+                    url: '/display_odds_and_picks',
+                    success: function(response) {
+                        displayData(response);
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Error: ' + error);
+                    }
+                });
+            });
+
             function displayData(data) {
                 $('#dataList').empty(); // Clear previous data
                 data.forEach(function(dictionary) {
@@ -41,6 +85,7 @@
                     var playerdata = $('<ul class="line-and-prop">')
                     playerdata.append('<li>' + dictionary["line"] + '</li>');
                     playerdata.append('<li>' + dictionary["proptype"] + '</li>');
+                    playerdata.append('<li>' + dictionary["type"] + '</li>');
                     subList.append(playerdata);
                     subList.append('<li>' + dictionary["odds"] + '</li>');
                     

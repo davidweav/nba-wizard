@@ -1,7 +1,8 @@
 import pandas as pd
-from betonline_scripts import fetch_betonline_odds
-from betonline_scripts import scrape_underdogs
+from utils import fetch_betonline_odds
+from utils import scrape_underdogs
 from datetime import datetime
+import json
 
 def get_odds_and_lines():
     fetch_betonline_odds.get_betonline_odds()
@@ -55,4 +56,6 @@ def find_matches():
                         None # no data to compare
     matching_lines = sorted(matching_lines, key=lambda k: k['odds'])
     matching_lines = [line for line in matching_lines if line['odds'] < -135]
+    with open('matching_lines.txt', 'w') as matching_lines_file:
+        json.dump(matching_lines, matching_lines_file, indent=2)
     return matching_lines

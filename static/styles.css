@@ -66,6 +66,11 @@ button {
     display: block;
     margin: auto;
 }
+.button-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
 button:hover {
     cursor: pointer;
 }
