@@ -77,7 +77,7 @@ def do_logic():
     # options.add_argument("--headless")
     options.add_argument("--log-level=3")
     options.add_argument("--disable-logging")
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
     login(driver)
     player_prop_divs_containers = WebDriverWait(driver, 10).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, "div.styles__content___R51k")))
     player_prop_divs = []

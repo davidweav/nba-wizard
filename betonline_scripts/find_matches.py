@@ -53,4 +53,6 @@ def find_matches():
                             })
                     else:
                         None # no data to compare
+    matching_lines = sorted(matching_lines, key=lambda k: k['odds'])
+    matching_lines = [line for line in matching_lines if line['odds'] < -135]
     return matching_lines
