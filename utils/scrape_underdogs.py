@@ -12,7 +12,7 @@ import csv
 from datetime import datetime
 
 def login(driver):
-    username = "fastblueswimmer"
+    username = "ugageeb@gmail.com"
     password = "jbpojerg772@dfbjpjrgSDG"
     driver.get("https://underdogfantasy.com/pick-em/higher-lower/all/nba")
     driver.maximize_window()

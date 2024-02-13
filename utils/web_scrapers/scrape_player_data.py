@@ -11,15 +11,31 @@ import pandas as pd
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
 import csv
 import re
 
+ublock_path = "chrome-extensions\AdBlock.crx"
 options = webdriver.ChromeOptions()
-# options.add_argument("--headless")
+options.add_argument("--headless")
 options.add_argument("--log-level=3")
 options.add_argument("--disable-logging")
+# options.add_argument('load-extension=' + ublock_path)
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+driver.maximize_window()
+
+def remove_ads(driver):
+    try:
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.adblock.primis")))
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.fs-sticky-slot-element")))
+    except TimeoutException:
+        print("Ads did not load in time")
+        return
+    ads = driver.find_elements(By.CSS_SELECTOR, "div.adblock.primis")
+    ads += driver.find_elements(By.CSS_SELECTOR, "div.fs-sticky-slot-element")
+    for ad in ads:
+        driver.execute_script("arguments[0].remove();", ad)
 
 def get_team_code(team_name):
     team_mapping = {
@@ -32,52 +48,63 @@ def get_team_code(team_name):
     }
     return team_mapping.get(team_name, -1)
 
-def get_player_info(driver, URL):
-    driver.get(URL)
-    meta_info_div = driver.find_element(By.CSS_SELECTOR, "div[id='meta']")
+def get_position_abbreviation(position):
+    position_mapping = {
+        "Point Guard": "PG", "Shooting Guard": "SG", "Small Forward": "SF", "Power Forward": "PF", "Center": "C"
+    }
+    return position_mapping.get(position, "N/A")
+
+def get_player_info(driver):
+    meta_info_div = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div[id='meta']")))
     try:
         meta_more_button = meta_info_div.find_element(By.CSS_SELECTOR, "button[id='meta_more_button']")
         meta_more_button.click()
     except NoSuchElementException:
         pass
     image_src = meta_info_div.find_element(By.CSS_SELECTOR, "img").get_attribute("src")
-    print(image_src)
     p_elements = meta_info_div.find_elements(By.CSS_SELECTOR, "p")
     full_text = ""
     for p_element in p_elements:
-        full_text += p_element.text
-    print(full_text)
+        full_text += "\n" + p_element.text
     # Parse required info
     position = re.search(r'Position: (.*?) ▪', full_text).group(1)
-    shoots = re.search(r'Shoots: (.*?)\d+-', full_text).group(1)
+    position = get_position_abbreviation(position)
+    shoots = re.search(r'Shoots: (.*?)\n', full_text).group(1)
+    shoots = "R" if "Right" in shoots else "L"
     height = re.search(r'(\d+-\d+), \d+lb', full_text).group(1)
+    feet, inches = map(int, height.split('-'))
+    height_in_inches = feet * 12 + inches
     weight = re.search(r'\d+-\d+, (\d+)lb', full_text).group(1)
-    debut = re.search(r'NBA Debut: (.*?)Experience', full_text).group(1)
-    draft_pick = re.search(r'Draft: (.*?), \d+st', full_text).group(1)
-    print(position, shoots, height, weight, debut, draft_pick)
-    return image_src, position, shoots, weight, debut, draft_pick
+    debut = re.search(r'NBA Debut: (.*?)\n', full_text).group(1)
+    debut_date = datetime.strptime(debut, "%B %d, %Y")
+    debut = debut_date.strftime("%Y-%m-%d")
+    draft_pick = re.search(r'Draft: .*? \(\d+(?:st|nd|rd|th) pick, (\d+)(?:st|nd|rd|th) overall\)', full_text).group(1)
+    return image_src, position, shoots, height_in_inches, weight, debut, draft_pick
         
 
-def get_player_seasons_links(driver, URL):
-    driver.get(URL)
-    driver.execute_script("window.scrollTo(0, 300)")
+def get_player_seasons_links(driver):
+    driver.execute_script("window.scrollTo(0, 1000)")
     # Get player links
     player_seasons_stat_table = driver.find_element(By.CSS_SELECTOR, "table.stats_table.sortable.row_summable.now_sortable#per_game[data-cols-to-freeze='1,3']")
     all_seasons_table = player_seasons_stat_table.find_elements(By.CSS_SELECTOR, "th[data-stat='season'] a")
     season_links = []
     for i in all_seasons_table:
         season_links.append(i.get_attribute("href"))
-    print("Player season links found for {URL}.")
+    print("Player season links found.")
     return season_links
 
 def get_stats(driver, URL):
     driver.get(URL)
+    remove_ads(driver)
+    driver.execute_script("window.scrollTo(0, 1500)")
     data_rows = driver.find_elements(By.CSS_SELECTOR, "tr[data-row]")
     game_data_list = []
     game = 0
     for data_row in data_rows:
         if data_row.get_attribute("class") != "thead":
             season = URL.split('/')[-1]
+            date = data_row.find_element(By.CSS_SELECTOR, "td[data-stat='date_game']").text
+            game_link = data_row.find_element(By.CSS_SELECTOR, "a").get_attribute("href"),
             age = float(data_row.find_element(By.CSS_SELECTOR, "td[data-stat='age']").text.replace("-", "."))
             team = get_team_code(data_row.find_element(By.CSS_SELECTOR, "td[data-stat='team_id']").text)
             opp = get_team_code(data_row.find_element(By.CSS_SELECTOR, "td[data-stat='opp_id']").text)
@@ -88,10 +115,10 @@ def get_stats(driver, URL):
                 minutes_played_text = data_row.find_element(By.CSS_SELECTOR, "td[data-stat='mp']").text
             except NoSuchElementException:
                 game_data = {
-                "season": season, "game": game, "age": age, "team": team, "opp": opp, "game-result": game_result, "min-played": 0,
+                "date": None, "season": season, "game": game, "age": age, "team": team, "opp": opp, "game-result": game_result, "min-played": 0,
                 "game-location": game_location, "fg": 0, "fga": 0, "fg-pct": 0, "fg3": 0, "fg3a": 0, "fg3-pct": 0, "ft": 0, "fta": 0,
                 "ft-pct": 0, "orb": 0, "drb": 0, "trb": 0, "ast": 0, "stl": 0, "blk": 0, "tov": 0, "pf": 0, "points": 0,
-                "game-score": 0, "plus-minus": 0
+                "game-score": 0, "plus-minus": 0, "game-link": game_link
                 }
                 game_data_list.append(game_data)
                 game += 1
@@ -100,7 +127,7 @@ def get_stats(driver, URL):
             minutes_played_split = minutes_played_text.split(":")
             minutes = int(minutes_played_split[0])
             seconds = int(minutes_played_split[1])
-            total_time_played = minutes + seconds / 60.0
+            mp = round(minutes + (seconds / 60.0), 3)
             fg = int(data_row.find_element(By.CSS_SELECTOR, "td[data-stat='fg']").text)
             fga = int(data_row.find_element(By.CSS_SELECTOR, "td[data-stat='fga']").text)
             fg_pct = data_row.find_element(By.CSS_SELECTOR, "td[data-stat='fg_pct']")
@@ -115,7 +142,7 @@ def get_stats(driver, URL):
             ft_pct = round(float(ft_pct_element.text), 3) if ft_pct_element.text else 0.0
             orb = int(data_row.find_element(By.CSS_SELECTOR, "td[data-stat='orb']").text)
             drb = int(data_row.find_element(By.CSS_SELECTOR, "td[data-stat='drb']").text)
-            trb = int(data_row.find_element(By.CSS_SELECTOR, "td[data-stat='trb']").text)
+            trb = orb + drb
             ast = int(data_row.find_element(By.CSS_SELECTOR, "td[data-stat='ast']").text)
             stl = int(data_row.find_element(By.CSS_SELECTOR, "td[data-stat='stl']").text)
             blk = int(data_row.find_element(By.CSS_SELECTOR, "td[data-stat='blk']").text)
@@ -125,48 +152,16 @@ def get_stats(driver, URL):
             game_score = round(float(data_row.find_element(By.CSS_SELECTOR, "td[data-stat='game_score']").text), 3)
             plus_minus = int(data_row.find_element(By.CSS_SELECTOR, "td[data-stat='plus_minus']").text)
             game_data = {
-                # "game": data_row.find_element(By.CSS_SELECTOR, "a").text,
-                # "game-link": data_row.find_element(By.CSS_SELECTOR, "a").get_attribute("href"),
-                "season": season, "game": game, "age": age, "team": team, "opp": opp, "game-result": game_result, "min-played": total_time_played,
+                "date": date, "season": season, "game": game, "age": age, "team": team, "opp": opp, "game-result": game_result, "min-played": mp,
                 "game-location": game_location, "fg": fg, "fga": fga, "fg-pct": fg_pct, "fg3": fg3, "fg3a": fg3a, "fg3-pct": fg3_pct, "ft": ft,
                 "fta": fta, "ft-pct": ft_pct, "orb": orb, "drb": drb, "trb": trb, "ast": ast, "stl": stl, "blk": blk, "tov": tov, "pf": pf,
-                "points": points, "game-score": game_score, "plus-minus": plus_minus
+                "points": points, "game-score": game_score, "plus-minus": plus_minus, "game-link": game_link
             }
             game_data_list.append(game_data)
             game += 1
             print(game)
     print(len(game_data_list))
     return game_data_list
-        
-    # season_links = get_player_seasons_links(driver, URL='https://www.basketball-reference.com/players/y/youngtr01.html')
-    # seasons_data = []
-    # for URL in season_links:
-    #   print(URL)
-    #   seasons_data.append(get_stats(driver, URL))
-
-def get_starting_lineups_from_website():
-    driver1 = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-    driver1.get("https://www.lineups.com/nba/lineups")
-    wait = WebDriverWait(driver1, 10)
-    all_teams_buttons_div = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.toggles-in-page-group.btn-group.toggles-group")))
-    all_teams_button = all_teams_buttons_div.find_elements(By.CSS_SELECTOR, "button")[1]
-    all_teams_button.click()
-    team_tables = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, "tbody[_ngcontent-lineup-app-id-c91]")))
-    players = []
-    for team_element in team_tables:
-        team_name = team_element.find_element(By.CSS_SELECTOR, "th a.link-black-underline span").text
-        player_elements = team_element.find_elements(By.CSS_SELECTOR, "tr.t-content")
-        for player_element in player_elements:
-            player = {
-                "position": player_element.find_elements(By.CSS_SELECTOR, "td[_ngcontent-lineup-app-id-c91]")[0].text,
-                "name": player_element.find_element(By.CSS_SELECTOR, "span.long-player-name").text,
-                "team": team_name,
-                "stats": None
-            }
-        players.append(player)
-    driver1.quit()
-    print("Starting players found.")
-    return players
 
 def get_players_from_betonline():
     current_date = datetime.now().strftime("%Y-%m-%d")
@@ -184,14 +179,17 @@ def get_players_from_betonline():
     return players
 
 def get_player_stats(driver, player):
-    words = player["name"].lower().split(' ')
-    first_name = words[0]
-    last_name = words[1]
-    URL = "https://www.basketball-reference.com/players/{}/{}{}01.html".format(last_name[0], last_name[:5], first_name[:2])
-    print(URL)
-    time.sleep(5)
-    
-    player_season_links = get_player_seasons_links(driver, URL)
+    driver.get("https://www.basketball-reference.com/players")
+    remove_ads(driver)
+    search_box = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "input[name='search']")))
+    search_box.send_keys(player["name"])
+    search_box.submit()
+    search_result = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.search-item-name")))
+    search_result_link = search_result.find_element(By.CSS_SELECTOR, "a").get_attribute("href")
+    driver.get(search_result_link)
+    player["image"], player["position"], player["shoots"], player["height"], player["weight"], player["debut"], player["draft-pick"] = get_player_info(driver)
+    time.sleep(1)
+    player_season_links = get_player_seasons_links(driver)
     all_player_game_stats = []
     for URL in player_season_links:
         all_player_game_stats.extend(get_stats(driver, URL))
@@ -200,9 +198,9 @@ def get_player_stats(driver, player):
 
 def save_player_stats_to_csv(player, filename):
     with open(filename, 'w', newline='') as csvfile:
-        fieldnames = ["game", "age", "team", "opp", "game-result", "min-played", "game-location", "fg", "fga", 
+        fieldnames = ["date", "season", "game", "age", "team", "opp", "game-result", "min-played", "game-location", "fg", "fga", 
                     "fg-pct",  "fg3", "fg3a", "fg3-pct", "ft", "fta", "ft-pct", "orb", "drb", "trb", "ast",
-                    "stl", "blk", "tov", "pf", "points", "game-score", "plus-minus"]
+                    "stl", "blk", "tov", "pf", "points", "game-score", "plus-minus", "game-link"]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         for game_data in player["stats"]:
@@ -214,11 +212,10 @@ def save_all_players_stats(players):
         all_player_game_stats = get_player_stats(driver, player)  # Get player stats
         player["stats"] = all_player_game_stats
         player_name_csv = player["name"].replace(" ", "_")
-        filename = f"{player_name_csv}_stats.csv"
+        filename = f"player_stats/{player_name_csv}_stats.csv"
         save_player_stats_to_csv(player, filename)
         print(filename, " saved...")
 
-# players = get_players_from_betonline()
-# save_all_players_stats(players)
-stats = get_player_info(driver, "https://www.basketball-reference.com/players/y/youngtr01.html")
+players = get_players_from_betonline()
+save_all_players_stats(players)
 driver.quit()
