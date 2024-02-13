@@ -18,9 +18,8 @@ def get_player_props_nba(event_id, player_odds_dict_nba, api_key):
     url_nba = f"https://api.the-odds-api.com/v4/sports/{sport_nba}/events/{event_id}/odds?apiKey={api_key}&regions={regions}&markets={markets_str}&oddsFormat={odds_format}&bookmakers={bookmaker_key}"
     url_williamhill = f"https://api.the-odds-api.com/v4/sports/{sport_nba}/events/{event_id}/odds?apiKey={api_key}&regions={regions}&markets={markets_str}&oddsFormat={odds_format}&bookmakers=williamhill_us"
 
-    print(url_nba)
     response = requests.get(url_nba)
-    # print(url_nba)
+
     if response.status_code == 401:
         print("Request quoata has been reached for", api_key)
         return False
@@ -69,8 +68,8 @@ def fetch_nba_pp(api_key):
 
     current_date = datetime.now().strftime("%Y-%m-%d")
 
-    input_file_path_nba = f"betonline_scripts/events/nba_games_{current_date}.json"
-    output_csv_file_path_nba = f"betonline_scripts/betonline-odds/nba_player_odds_{current_date}.csv"
+    input_file_path_nba = f"betonline_scripts/events/games_{current_date}.json"
+    output_csv_file_path_nba = f"betonline_scripts/betonline-odds/betonline_odds_{current_date}.csv"
 
     with open(input_file_path_nba, "r") as json_file_nba:
         games_info_nba = json.load(json_file_nba)

@@ -12,8 +12,8 @@ def get_odds_and_lines():
 def find_matches():
     current_date = datetime.now().strftime("%Y-%m-%d")
     try:
-        df1 = pd.read_csv(f'betonline_scripts/betonline-odds/nba_player_odds_{current_date}.csv')
-        df2 = pd.read_csv(f'betonline_scripts/underdog-lines/player_data_{current_date}.csv')
+        df1 = pd.read_csv(f'betonline_scripts/betonline-odds/betonline_odds_{current_date}.csv')
+        df2 = pd.read_csv(f'betonline_scripts/underdog-lines/underdog_lines_{current_date}.csv')
     except KeyError as e:
         print(f"Missing column: {e}")
         exit()

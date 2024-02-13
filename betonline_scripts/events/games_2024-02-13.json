@@ -1,0 +1,56 @@
+{
+  "0": {
+    "event_id": "f4ccb1bb2f3adba910406bacc11253de",
+    "date": "2024-02-13",
+    "time": "19:40:00",
+    "teams": [
+      "Brooklyn Nets",
+      "Boston Celtics"
+    ]
+  },
+  "1": {
+    "event_id": "cbb23b2b4f43ea809f57da9fb27f494d",
+    "date": "2024-02-13",
+    "time": "19:40:00",
+    "teams": [
+      "Orlando Magic",
+      "Oklahoma City Thunder"
+    ]
+  },
+  "2": {
+    "event_id": "5bf8dec6633cea758ec0e4840c028f46",
+    "date": "2024-02-13",
+    "time": "20:00:00",
+    "teams": [
+      "Milwaukee Bucks",
+      "Miami Heat"
+    ]
+  },
+  "3": {
+    "event_id": "21066865fc6af65c52029ba42975c02a",
+    "date": "2024-02-13",
+    "time": "22:10:00",
+    "teams": [
+      "Portland Trail Blazers",
+      "Minnesota Timberwolves"
+    ]
+  },
+  "4": {
+    "event_id": "3f1386b3ad85825164751576357ba783",
+    "date": "2024-02-13",
+    "time": "22:10:00",
+    "teams": [
+      "Phoenix Suns",
+      "Sacramento Kings"
+    ]
+  },
+  "5": {
+    "event_id": "519175190965d6827f08d26fecd478dc",
+    "date": "2024-02-13",
+    "time": "22:40:00",
+    "teams": [
+      "Los Angeles Lakers",
+      "Detroit Pistons"
+    ]
+  }
+}

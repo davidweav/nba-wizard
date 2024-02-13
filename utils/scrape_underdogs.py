@@ -12,8 +12,8 @@ import csv
 from datetime import datetime
 
 def login(driver):
-    username = "adamruehle@live.com"
-    password = "sLEyC6P2v_KhZmG6.eV6xVUy4VqCnc"
+    username = "fastblueswimmer"
+    password = "jbpojerg772@dfbjpjrgSDG"
     driver.get("https://underdogfantasy.com/pick-em/higher-lower/all/nba")
     driver.maximize_window()
     time.sleep(3)
@@ -29,7 +29,7 @@ def login(driver):
 
 def write_to_csv(data):
     current_date = datetime.now().strftime("%Y-%m-%d")
-    csv_file_path = f'betonline_scripts/underdog-lines/player_data_{current_date}.csv'
+    csv_file_path = f'betonline_scripts/underdog-lines/underdog_lines_{current_date}.csv'
     directory = os.path.dirname(csv_file_path)
     if not os.path.exists(directory):
         os.makedirs(directory)

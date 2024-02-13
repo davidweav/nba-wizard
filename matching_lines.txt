@@ -1,18 +1,34 @@
 [
   {
-    "name": "Isaiah Hartenstein",
+    "name": "Jrue Holiday",
     "proptype": "Rebounds",
-    "line": 8.5,
-    "odds": -143,
+    "line": 4.5,
+    "odds": -149,
     "type": "Over",
-    "implied_probability": 58.85
+    "implied_probability": 59.84
   },
   {
-    "name": "Jaren Jackson Jr.",
+    "name": "Jalen Suggs",
     "proptype": "Rebounds",
-    "line": 5.5,
-    "odds": -143,
+    "line": 3.5,
+    "odds": -149,
     "type": "Under",
-    "implied_probability": 58.85
+    "implied_probability": 59.84
+  },
+  {
+    "name": "Karl-Anthony Towns",
+    "proptype": "Assists",
+    "line": 2.5,
+    "odds": -139.0,
+    "type": "Over",
+    "implied_probability": 58.16
+  },
+  {
+    "name": "Jalen Duren",
+    "proptype": "Rebounds",
+    "line": 11.5,
+    "odds": -137,
+    "type": "Over",
+    "implied_probability": 57.81
   }
 ]
