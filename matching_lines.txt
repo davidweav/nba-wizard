@@ -1,1 +1,50 @@
-[]
+[
+  {
+    "name": "Jayson Tatum",
+    "proptype": "Assists",
+    "line": 5.5,
+    "odds": -156.0,
+    "type": "Under",
+    "implied_probability": 60.94
+  },
+  {
+    "name": "Donovan Mitchell",
+    "proptype": "Assists",
+    "line": 6.5,
+    "odds": -143.0,
+    "type": "Over",
+    "implied_probability": 58.85
+  },
+  {
+    "name": "Tyrese Haliburton",
+    "proptype": "Assists",
+    "line": 11.5,
+    "odds": -143.0,
+    "type": "Over",
+    "implied_probability": 58.85
+  },
+  {
+    "name": "Tre Jones",
+    "proptype": "Assists",
+    "line": 7.5,
+    "odds": -143.0,
+    "type": "Under",
+    "implied_probability": 58.85
+  },
+  {
+    "name": "Mikal Bridges",
+    "proptype": "Assists",
+    "line": 3.5,
+    "odds": -135.0,
+    "type": "Under",
+    "implied_probability": 57.45
+  },
+  {
+    "name": "Myles Turner",
+    "proptype": "Rebounds",
+    "line": 7.5,
+    "odds": -135.0,
+    "type": "Under",
+    "implied_probability": 57.45
+  }
+]

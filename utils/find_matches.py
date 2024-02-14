@@ -41,7 +41,9 @@ def find_matches():
                         if 's' in str(prop_line_df2):
                             prop_line_df2 = prop_line_df2[:-1]
                             is_underdog_prop_scorcher = True
+                        
                         # Compare the property lines between df1 and df2
+                        prop_line_df1, prop_line_df2 = float(prop_line_df1), float(prop_line_df2)
                         if prop_line_df1 == prop_line_df2:
                             if row1[prop + '_Over'] < row1[prop + '_Under']:
                                 odds_value = row1[prop + '_Over']
@@ -64,7 +66,7 @@ def find_matches():
                     else:
                         None # no data to compare
     matching_lines = sorted(matching_lines, key=lambda k: k['odds'])
-    matching_lines = [line for line in matching_lines if line['odds'] < -135]
+    matching_lines = [line for line in matching_lines if line['odds'] <= -135]
     with open('matching_lines.txt', 'w') as matching_lines_file:
         json.dump(matching_lines, matching_lines_file, indent=2)
     return matching_lines

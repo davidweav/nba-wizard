@@ -17,14 +17,13 @@ def login(driver):
     driver.get("https://underdogfantasy.com/pick-em/higher-lower/all/nba")
     driver.maximize_window()
     time.sleep(3)
-    email_input = driver.find_element(By.CSS_SELECTOR, '.styles__field__Q6LKF [data-testid="email_input"]')
+    email_input = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, '.styles__field__Q6LKF [data-testid="email_input"]')))
     email_input.send_keys(username)
     password_input = driver.find_element(By.CSS_SELECTOR, '.styles__field__Q6LKF [data-testid="password_input"]')
     password_input.send_keys(password)
     sign_in_button = driver.find_element(By.CSS_SELECTOR, '[data-testid="sign-in-button"]')
     sign_in_button.click()
-    time.sleep(10)
-    # driver.get("https://underdogfantasy.com/pick-em/higher-lower/all/nba")
+    signed_in_verifier_element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'a.styles__link__C_eQ8.styles__active__UQzgQ')))
     driver.get("https://underdogfantasy.com/pick-em/higher-lower/pre-game/nba")
 
 def write_to_csv(data):

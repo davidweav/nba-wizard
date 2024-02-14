@@ -1,0 +1,119 @@
+{
+  "0": {
+    "event_id": "3873201e0f40ce422145c71be5e1a61f",
+    "date": "2024-02-14",
+    "time": "19:10:00",
+    "teams": [
+      "Charlotte Hornets",
+      "Atlanta Hawks"
+    ]
+  },
+  "1": {
+    "event_id": "e77f5314a1a805736fd7247d871e3c59",
+    "date": "2024-02-14",
+    "time": "19:10:00",
+    "teams": [
+      "Philadelphia 76ers",
+      "Miami Heat"
+    ]
+  },
+  "2": {
+    "event_id": "93b5425c6c4f1b6703cb9119eaeb8abe",
+    "date": "2024-02-14",
+    "time": "19:10:00",
+    "teams": [
+      "Orlando Magic",
+      "New York Knicks"
+    ]
+  },
+  "3": {
+    "event_id": "9ea896d4f598255427899a99e5774f04",
+    "date": "2024-02-14",
+    "time": "19:40:00",
+    "teams": [
+      "Boston Celtics",
+      "Brooklyn Nets"
+    ]
+  },
+  "4": {
+    "event_id": "086bdadf2294ca0d8eba86e1d8f951d8",
+    "date": "2024-02-14",
+    "time": "19:40:00",
+    "teams": [
+      "Cleveland Cavaliers",
+      "Chicago Bulls"
+    ]
+  },
+  "5": {
+    "event_id": "b2247224ce2b85d0b92bc742b5c2be94",
+    "date": "2024-02-14",
+    "time": "19:40:00",
+    "teams": [
+      "Toronto Raptors",
+      "Indiana Pacers"
+    ]
+  },
+  "6": {
+    "event_id": "a219e8a170388085b42533c4f9098a75",
+    "date": "2024-02-14",
+    "time": "20:10:00",
+    "teams": [
+      "Memphis Grizzlies",
+      "Houston Rockets"
+    ]
+  },
+  "7": {
+    "event_id": "5c13792dff5b758592c8f11a96e66cfd",
+    "date": "2024-02-14",
+    "time": "20:10:00",
+    "teams": [
+      "New Orleans Pelicans",
+      "Washington Wizards"
+    ]
+  },
+  "8": {
+    "event_id": "66c8edc37c95ce7dc6b3f5059903b586",
+    "date": "2024-02-14",
+    "time": "20:40:00",
+    "teams": [
+      "Dallas Mavericks",
+      "San Antonio Spurs"
+    ]
+  },
+  "9": {
+    "event_id": "83fa94fe55795402814cc80e29fdefd2",
+    "date": "2024-02-14",
+    "time": "21:10:00",
+    "teams": [
+      "Denver Nuggets",
+      "Sacramento Kings"
+    ]
+  },
+  "10": {
+    "event_id": "844a860e1ed76a82f1495bc9b4525f97",
+    "date": "2024-02-14",
+    "time": "21:10:00",
+    "teams": [
+      "Phoenix Suns",
+      "Detroit Pistons"
+    ]
+  },
+  "11": {
+    "event_id": "98be3134084b48da3103a57d8929d934",
+    "date": "2024-02-14",
+    "time": "21:10:00",
+    "teams": [
+      "Utah Jazz",
+      "Los Angeles Lakers"
+    ]
+  },
+  "12": {
+    "event_id": "95af522328ff23fc4f1975a21648e84d",
+    "date": "2024-02-14",
+    "time": "22:10:00",
+    "teams": [
+      "Golden State Warriors",
+      "Los Angeles Clippers"
+    ]
+  }
+}
