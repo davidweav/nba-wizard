@@ -76,6 +76,10 @@
 
             function displayData(data) {
                 $('#dataList').empty(); // Clear previous data
+
+                if (data.length == 0) {
+                    $('#dataList').append('<li>No matches found. Try again later</li>');
+                
                 data.forEach(function(dictionary) {
                     var listItem = $('<li>');
                     var subList = $('<ul class="player">');

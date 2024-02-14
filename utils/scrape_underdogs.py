@@ -23,7 +23,7 @@ def login(driver):
     password_input.send_keys(password)
     sign_in_button = driver.find_element(By.CSS_SELECTOR, '[data-testid="sign-in-button"]')
     sign_in_button.click()
-    time.sleep(2)
+    time.sleep(10)
     # driver.get("https://underdogfantasy.com/pick-em/higher-lower/all/nba")
     driver.get("https://underdogfantasy.com/pick-em/higher-lower/pre-game/nba")
 
