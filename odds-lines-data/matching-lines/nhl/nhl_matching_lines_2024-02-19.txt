@@ -1,0 +1,11 @@
+[
+  {
+    "name": "J.T. Miller",
+    "proptype": "Shots",
+    "line": 2.5,
+    "odds": -130.0,
+    "type": "Under",
+    "implied_probability": 56.52,
+    "multiplier": "1"
+  }
+]

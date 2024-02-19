@@ -1,6 +1,11 @@
+from numpy import NaN
 import pandas as pd
 from datetime import datetime
 import json
+import time
+import math
+
+from sympy import true
 
 def find_matches_nba():
     current_date = datetime.now().strftime("%Y-%m-%d")
@@ -73,38 +78,75 @@ def find_matches_nhl():
         print(f"Missing column: {e}")
         exit()
     matching_lines = []
-    properties = ['Saves', 'Shots', 'Goals']
-
+    properties = ['Shots', 'Points'] # 'Goals', 'Assists', etc. could be added
     for prop in properties:
-        prop_line_betonline = f'{prop}_Line'
-
+        prop_line_betonline = f'{prop}_Line' # 'Shots_Line', 'Points_Line', etc.
         # Iterate over each row in the betonline DataFrame
         for index, row1 in df1.iterrows():
             player_name = row1['Player']
-            prop_line_betonline_value = row1[prop_line_betonline]
-
-
-            for index, row2 in df2.iterrows():
-                prop_lines_underdog = [row2[f'{prop}H'], row2[f'{prop}L'], row2[f'{prop}C']]
-                    
+            prop_line_betonline_value = row1[prop_line_betonline] # 'Shots_Line' value, 'Points_Line' value, etc.
+            row2 = df2.loc[df2['Name'] == player_name]
+            if not row2.empty and isinstance(prop_line_betonline_value, float) and not math.isnan(prop_line_betonline_value):
+                prop_line_underdog_C = str(row2[f'{prop}C'].iloc[0])
+                prop_line_underdog_H = str(row2[f'{prop}H'].iloc[0])
+                prop_line_underdog_L = str(row2[f'{prop}L'].iloc[0])
+                prop_lines_underdog = [prop_line_underdog_H, prop_line_underdog_L, prop_line_underdog_C]
+                # print(prop_line_underdog_C, prop_line_underdog_H, prop_line_underdog_L, prop_line_betonline_value)
                 # Check if the property line from BetOnline matches any of the property lines from Underdog
-                if prop_line_betonline_value in prop_lines_underdog:
+                prop_line_betonline_string = str(prop_line_betonline_value)
+                prop_lines_underdog_strings = []
+                matching_line_exists = False
+                for line in prop_lines_underdog:
+                    if isinstance(line, float) and math.isnan(line):
+                        prop_lines_underdog_strings.append("nan")
+                    else:
+                        prop_lines_underdog_strings.append(str(line))
+                for line in prop_lines_underdog_strings:
+                    if prop_line_betonline_string in line:
+                        matching_line_exists = True # found a matching line
+                if matching_line_exists:
                     # Calculate additional information
-                    odds = row1[f'{prop}_Over'] if row1[f'{prop}_Over'] < row1[f'{prop}_Under'] else row1[f'{prop}_Under']
-                    odds_string = 'Over' if row1[f'{prop}_Over'] < row1[f'{prop}_Under'] else 'Under'
-                    implied_probability = round(abs(odds) / (abs(odds) + 100) * 100, 2)
-                    multiplier = row2['Multiplier']
-                    
-                    # Save the matching lines along with additional information
-                    matching_lines.append({
-                        'name': player_name,
-                        'prop': prop,
-                        'line': prop_line_betonline_value,
-                        'odds': odds,
-                        'type': odds_string,
-                        'implied_probability': implied_probability,
-                        'multiplier': multiplier
-                    })
+                    found_match = False
+                    if str(prop_line_underdog_C) != "nan" and prop_line_underdog_C.split("x")[0] in prop_line_betonline_string:
+                        found_match = True
+                        prop_line_underdog = prop_line_underdog_C
+                        odds_string = 'Over' if row1[f'{prop}_Over'] < row1[f'{prop}_Under'] else 'Under'
+                        odds = row1[f'{prop}_Over'] if row1[f'{prop}_Over'] < row1[f'{prop}_Under'] else row1[f'{prop}_Under']
+                    # Check if the Underdog line for user choice is missing
+                    if prop_line_underdog_C == "nan":
+                        # Check the higher and lower lines
+                        if prop_line_underdog_H.split("x")[0] == prop_line_betonline_value and row1[f"{prop}_Over"] < row1[f"{prop}_Under"]:
+                            # If the line from BetOnline matches the line from Underdog, and the 
+                            # 'Over' odds are better than the 'Under' odds, then use the 'Over' line
+                            found_match = True
+                            prop_line_underdog = prop_line_underdog_H
+                            odds_string = "Over"
+                            odds = row1[f'{prop}_Over']
+                        elif prop_line_underdog_L.split("x")[0] == prop_line_betonline_value:
+                            # Line from BetOnline matches the line from Underdog, and the 'Under' odds 
+                            # are better than the 'Over' odds
+                            found_match = True
+                            prop_line_underdog = prop_line_underdog_L
+                            odds_string = "Under"
+                            odds = row1[f'{prop}_Under']
+                    if found_match:
+                        implied_probability = round(abs(odds) / (abs(odds) + 100) * 100, 2)
+                        multiplier = prop_line_underdog.split("x")[1]
+                        # Save the matching lines along with additional information
+                        matching_lines.append({
+                            'name': player_name,
+                            'proptype': prop,
+                            'line': prop_line_betonline_value,
+                            'odds': odds,
+                            'type': odds_string,
+                            'implied_probability': implied_probability,
+                            'multiplier': multiplier
+                        })
+                else:
+                    # No matching line found
+                    None
+    matching_lines = sorted(matching_lines, key=lambda k: k['odds'])
+    matching_lines = [line for line in matching_lines if line['odds'] <= -130]
     with open(f'odds-lines-data/matching-lines/nhl/nhl_matching_lines_{current_date}.txt', 'w') as matching_lines_file:
         json.dump(matching_lines, matching_lines_file, indent=2)
     return matching_lines

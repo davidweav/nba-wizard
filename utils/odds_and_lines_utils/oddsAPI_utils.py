@@ -31,8 +31,6 @@ def get_player_props_for_event(api_key, event_id, sport, desired_markets, bookma
         for market in player_props_data['bookmakers'][0]['markets']:
             market_key = market['key']
             market_type = market_key.split('_')[1].capitalize()
-            if "total_saves" in market_key:
-                market_type = "Saves"
             market_types.append(market_type)
         for market in player_props_data['bookmakers'][0]['markets']:
             market_key = market['key']
@@ -59,9 +57,12 @@ def get_player_props_for_event(api_key, event_id, sport, desired_markets, bookma
         return False, f"Error processing data: {str(e)}"
     return True, player_odds_dict, market_types
 
-def fetch_props_for_all_events(api_key, input_file_path, output_file_path, sport, desired_markets, bookmaker_key):
+def fetch_props_for_all_events(api_key, sport, desired_markets, bookmaker_key):
     full_player_odds_dict = {}
-
+    sport_abbreviation = sport.split("_")[1]
+    current_date = datetime.now().strftime("%Y-%m-%d")
+    input_file_path = f"odds-lines-data/events/{sport_abbreviation}/{sport_abbreviation}_games_{current_date}.json"
+    output_file_path = f"odds-lines-data/betonline/{sport_abbreviation}/{sport_abbreviation}_odds_{current_date}.csv"
     with open(input_file_path, "r") as json_file:
         games_info = json.load(json_file)
     
@@ -83,7 +84,12 @@ def fetch_props_for_all_events(api_key, input_file_path, output_file_path, sport
                     full_player_odds_dict[player_name].update(prop_data)
             
     with open(output_file_path, "w", newline='') as csv_file:
-        writer = csv.DictWriter(csv_file, fieldnames=market_types)
+        fieldnames = ["Player"]
+        for market_type in market_types:
+            for over_under in ["Over", "Under", "Line"]:
+                column_name = f"{market_type}_{over_under}"
+                fieldnames.append(column_name)
+        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
         
         # Write headers
         writer.writeheader()
@@ -95,7 +101,7 @@ def fetch_props_for_all_events(api_key, input_file_path, output_file_path, sport
                 print(f"Player: {player_name}, Prop Type: {prop_type}, Odds Data: {odds_data}")
                 print(odds_data)
                 for over_under in ["Over", "Under", "Line"]:
-                    column_name = f"{prop_type.split('_')[1].capitalize()}_{over_under}"  # Remove 'player_' prefix
+                    column_name = f"{prop_type }_{over_under}"  # Remove 'player_' prefix
                     row_data[column_name] = odds_data[over_under]
             writer.writerow(row_data)
     return True
@@ -135,6 +141,7 @@ def get_events(api_key, sport):
                     }
 
         current_date = datetime.now().strftime("%Y-%m-%d")
+        sport = sport.split("_")[1]
         with open(f"odds-lines-data/events/{sport}/{sport}_games_{current_date}.json", "w") as json_file:
             json.dump(games, json_file, indent=2)
 
@@ -144,11 +151,14 @@ def get_events(api_key, sport):
 
 def get_events_props_lines(api_key, sport, desired_markets, bookmaker_key):
     fetch_events_success = get_events(api_key, sport)
+    if fetch_events_success:
+        print("Events retrieved...")
     if not fetch_events_success:
         return False
     current_date = datetime.now().strftime("%Y-%m-%d")
-    success = fetch_props_for_all_events(api_key, f"odds-lines-data/events/{sport}/{sport}_games_{current_date}.json", f"odds-lines-data/betonline/{sport}/{sport}_odds_{current_date}.csv", sport, desired_markets, bookmaker_key)
+    success = fetch_props_for_all_events(api_key, sport, desired_markets, bookmaker_key)
     if success:
+        print("Props and lines retrieved...")
         return True
     return False
 

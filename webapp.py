@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, redirect, render_template, send_from_directory
 from utils.find_matches import find_matches_nba, find_matches_nhl
-from utils.odds_and_lines_utils.fetch_betonline_odds import get_nba_betonline_odds, get_nhl_betonline_odds
+import utils.odds_and_lines_utils.fetch_betonline_odds as fetch_betonline_odds
 from utils.odds_and_lines_utils.nba.scrape_nba_underdog import scrape_nba_lines
 from utils.odds_and_lines_utils.nhl.scrape_nhl_underdog import scrape_nhl_lines
 app = Flask(__name__)
@@ -19,7 +19,7 @@ def nhl():
 
 @app.route('/get_nba_data', methods=['POST'])
 def get_data():
-    get_nba_betonline_odds()
+    fetch_betonline_odds.get_nba_betonline_odds()
     scrape_nba_lines()
     data = find_matches_nba()
     return jsonify(data)
@@ -32,12 +32,12 @@ def get_nhl_data():
 
 @app.route('/get_nba_betonline_odds', methods=['POST'])
 def get_betonline_odds():
-    get_nba_betonline_odds()
+    fetch_betonline_odds.get_nba_betonline_odds()
     return "Success"
 
-@app.route('/get_nhl_betonline_lines', methods=['POST'])
+@app.route('/get_nhl_betonline_odds', methods=['POST'])
 def get_nhl_betonline_odds():
-    get_nhl_betonline_odds()
+    fetch_betonline_odds.get_nhl_betonline_odds()
     return "Success"
 
 @app.route('/get_nba_underdog_lines', methods=['POST'])
@@ -45,7 +45,7 @@ def get_nba_underdog_odds():
     scrape_nba_lines()
     return "Success"
 
-@app.route('/get_nhl_underdog_odds', methods=['POST'])
+@app.route('/get_nhl_underdog_lines', methods=['POST'])
 def get_nhl_underdog_odds():
     scrape_nhl_lines()
     return "Success"

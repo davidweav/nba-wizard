@@ -18,8 +18,8 @@
         <button class="nav-button" id="getNHLDataBtn">Fetch & Display Odds and Picks</button>
     </div>
     <div class="button-row">
-        <button class="nav-button" id="getBetOnlineNHLBtn">Fetch BetOnline Odds</button>
-        <button class="nav-button" id="getUnderdogNHLBtn">Fetch Underdog Odds</button>
+        <button class="nav-button" id="getNHLBetOnlineBtn">Fetch BetOnline Odds</button>
+        <button class="nav-button" id="getNHLUnderdogBtn">Fetch Underdog Odds</button>
     </div>
     <div class="button-row">
         <button class="nav-button" id="displayNHLOddsAndPicksBtn">Display Odds and Picks</button>
@@ -42,20 +42,20 @@
                 });
             });
 
-            $('#getBetOnlineNHLBtn').click(function () {
+            $('#getNHLBetOnlineBtn').click(function () {
                 $.ajax({
                     type: 'POST',
-                    url: '/get_betonline_nhl_odds',
+                    url: '/get_nhl_betonline_odds',
                     error: function (xhr, status, error) {
                         alert('Error: ' + error);
                     }
                 });
             });
 
-            $('#getUnderdogNHLBtn').click(function () {
+            $('#getNHLUnderdogBtn').click(function () {
                 $.ajax({
                     type: 'POST',
-                    url: '/get_underdog_nhl_lines',
+                    url: '/get_nhl_underdog_lines',
                     error: function (xhr, status, error) {
                         alert('Error: ' + error);
                     }
