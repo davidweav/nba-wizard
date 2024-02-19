@@ -1,4 +1,4 @@
-from utils.odds_and_lines_utils.oddsAPI_utils import fetch_nba_odds_and_lines, fetch_nhl_odds_and_lines
+from utils.odds_and_lines_utils.theOddsAPI_utils import fetch_nba_odds_and_lines, fetch_nhl_odds_and_lines
 
 api_keys = ["a66b087a4628fe473a0d84cc8dd14533", "162e2c909f97655391e7fd98fcbaffdb", "c8e95f0047d9742ffbc3b8680892779c",
             "36aab4f1365caf620725f785b70db26a", "babd3fe7586d4ad29d3a4dabb0c74619", "35b4f6c81244ad6f6d5fcb31a2ed6186",
@@ -16,7 +16,6 @@ def get_nba_betonline_odds():
     current_api_key = None
     for api_key in api_keys:
         if fetch_nba_odds_and_lines(api_key):
-            current_api_key = api_key
             break
     print(current_api_key)
 
@@ -24,6 +23,5 @@ def get_nhl_betonline_odds():
     current_api_key = None
     for api_key in api_keys:
         if fetch_nhl_odds_and_lines(api_key):
-            current_api_key = api_key
             break
     print(current_api_key)

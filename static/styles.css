@@ -48,6 +48,7 @@ p {
 }
 
 .line-and-prop {
+    /* push to left */
     display: flex;
     justify-content: flex-start;
     font-size: 30px;
@@ -55,9 +56,15 @@ p {
 .line-and-prop li {
     margin-right: 10px;
 }
-.implied-prob {
+.multiplier-and-probability {
+    /* push to middle */
+    display: flex;
+    justify-content: center;
     font-size: 20px;
-    text-align: center;    
+    text-align: center;
+}
+.multiplier-and-probability li {
+    margin-left: 10px;
 }
 button {
     outline: none;

@@ -92,7 +92,10 @@
                     playerdata.append('<li>' + dictionary["type"] + '</li>');
                     playerdata.append('<li>' + dictionary["odds"] + '</li>');
                     subList.append(playerdata);
-                    subList.append('<li class="implied-prob">' + dictionary["implied_probability"] + "% chance of hitting..." + '</li>');
+                    var multiplierAndProbability = $('<ul class="multiplier-and-probability">')
+                    multiplierAndProbability.append('<li>' + dictionary["implied_probability"] + "% chance of hitting..." + '</li>');
+                    multiplierAndProbability.append('<li>' + dictionary["multiplier"] + " multiplier" + '</li>')
+                    subList.append(multiplierAndProbability);
 
                     listItem.append(subList);
                     $('#NHLDataList').append(listItem);

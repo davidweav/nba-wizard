@@ -1,11 +1,218 @@
 [
   {
-    "name": "J.T. Miller",
+    "name": "Brayden Point",
+    "proptype": "Points",
+    "line": 0.5,
+    "odds": -270.0,
+    "type": "Over",
+    "implied_probability": 72.97,
+    "multiplier": "0.7"
+  },
+  {
+    "name": "Steven Stamkos",
+    "proptype": "Points",
+    "line": 0.5,
+    "odds": -255.0,
+    "type": "Over",
+    "implied_probability": 71.83,
+    "multiplier": "0.7"
+  },
+  {
+    "name": "Victor Hedman",
+    "proptype": "Points",
+    "line": 0.5,
+    "odds": -240.0,
+    "type": "Over",
+    "implied_probability": 70.59,
+    "multiplier": "0.75"
+  },
+  {
+    "name": "Kyle Connor",
+    "proptype": "Points",
+    "line": 0.5,
+    "odds": -230.0,
+    "type": "Over",
+    "implied_probability": 69.7,
+    "multiplier": "0.75"
+  },
+  {
+    "name": "Ryan Nugent-Hopkins",
+    "proptype": "Points",
+    "line": 0.5,
+    "odds": -215.0,
+    "type": "Over",
+    "implied_probability": 68.25,
+    "multiplier": "0.8"
+  },
+  {
+    "name": "Andrei Svechnikov",
+    "proptype": "Points",
+    "line": 0.5,
+    "odds": -215.0,
+    "type": "Over",
+    "implied_probability": 68.25,
+    "multiplier": "0.8"
+  },
+  {
+    "name": "Zach Hyman",
+    "proptype": "Points",
+    "line": 0.5,
+    "odds": -200.0,
+    "type": "Over",
+    "implied_probability": 66.67,
+    "multiplier": "0.8"
+  },
+  {
+    "name": "Clayton Keller",
+    "proptype": "Points",
+    "line": 0.5,
+    "odds": -180.0,
+    "type": "Over",
+    "implied_probability": 64.29,
+    "multiplier": "0.85"
+  },
+  {
+    "name": "Tim Stutzle",
+    "proptype": "Points",
+    "line": 0.5,
+    "odds": -175.0,
+    "type": "Over",
+    "implied_probability": 63.64,
+    "multiplier": "0.85"
+  },
+  {
+    "name": "Brandon Hagel",
+    "proptype": "Points",
+    "line": 0.5,
+    "odds": -175.0,
+    "type": "Over",
+    "implied_probability": 63.64,
+    "multiplier": "0.85"
+  },
+  {
+    "name": "Brady Tkachuk",
+    "proptype": "Points",
+    "line": 0.5,
+    "odds": -175.0,
+    "type": "Over",
+    "implied_probability": 63.64,
+    "multiplier": "0.85"
+  },
+  {
+    "name": "Mark Scheifele",
+    "proptype": "Points",
+    "line": 0.5,
+    "odds": -170.0,
+    "type": "Over",
+    "implied_probability": 62.96,
+    "multiplier": "0.85"
+  },
+  {
+    "name": "Claude Giroux",
+    "proptype": "Points",
+    "line": 0.5,
+    "odds": -170.0,
+    "type": "Over",
+    "implied_probability": 62.96,
+    "multiplier": "0.85"
+  },
+  {
+    "name": "Martin Necas",
+    "proptype": "Points",
+    "line": 0.5,
+    "odds": -165.0,
+    "type": "Over",
+    "implied_probability": 62.26,
+    "multiplier": "0.85"
+  },
+  {
+    "name": "Seth Jarvis",
+    "proptype": "Points",
+    "line": 0.5,
+    "odds": -160.0,
+    "type": "Over",
+    "implied_probability": 61.54,
+    "multiplier": "0.85"
+  },
+  {
+    "name": "Evan Bouchard",
+    "proptype": "Points",
+    "line": 0.5,
+    "odds": -155.0,
+    "type": "Over",
+    "implied_probability": 60.78,
+    "multiplier": "0.9"
+  },
+  {
+    "name": "Claude Giroux",
     "proptype": "Shots",
     "line": 2.5,
-    "odds": -130.0,
+    "odds": -135.0,
     "type": "Under",
-    "implied_probability": 56.52,
+    "implied_probability": 57.45,
+    "multiplier": "1"
+  },
+  {
+    "name": "Ryan Nugent-Hopkins",
+    "proptype": "Shots",
+    "line": 2.5,
+    "odds": -133.0,
+    "type": "Under",
+    "implied_probability": 57.08,
+    "multiplier": "1"
+  },
+  {
+    "name": "Evan Bouchard",
+    "proptype": "Shots",
+    "line": 2.5,
+    "odds": -133.0,
+    "type": "Under",
+    "implied_probability": 57.08,
+    "multiplier": "1"
+  },
+  {
+    "name": "Seth Jarvis",
+    "proptype": "Shots",
+    "line": 2.5,
+    "odds": -131.0,
+    "type": "Under",
+    "implied_probability": 56.71,
+    "multiplier": "1"
+  },
+  {
+    "name": "Nick Foligno",
+    "proptype": "Shots",
+    "line": 1.5,
+    "odds": -129.0,
+    "type": "Under",
+    "implied_probability": 56.33,
+    "multiplier": "1"
+  },
+  {
+    "name": "Anthony Cirelli",
+    "proptype": "Points",
+    "line": 0.5,
+    "odds": -128.0,
+    "type": "Over",
+    "implied_probability": 56.14,
+    "multiplier": "0.9"
+  },
+  {
+    "name": "Brandon Hagel",
+    "proptype": "Shots",
+    "line": 2.5,
+    "odds": -123.0,
+    "type": "Under",
+    "implied_probability": 55.16,
+    "multiplier": "1"
+  },
+  {
+    "name": "Nick Schmaltz",
+    "proptype": "Points",
+    "line": 0.5,
+    "odds": -122.0,
+    "type": "Over",
+    "implied_probability": 54.95,
     "multiplier": "1"
   }
 ]

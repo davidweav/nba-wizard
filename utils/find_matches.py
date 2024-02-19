@@ -5,8 +5,6 @@ import json
 import time
 import math
 
-from sympy import true
-
 def find_matches_nba():
     current_date = datetime.now().strftime("%Y-%m-%d")
     try:
@@ -115,14 +113,34 @@ def find_matches_nhl():
                     # Check if the Underdog line for user choice is missing
                     if prop_line_underdog_C == "nan":
                         # Check the higher and lower lines
-                        if prop_line_underdog_H.split("x")[0] == prop_line_betonline_value and row1[f"{prop}_Over"] < row1[f"{prop}_Under"]:
+                        print(row1[f"{prop}_Over"], row1[f"{prop}_Under"], prop_line_underdog_H.split("x")[0], prop_line_underdog_L.split("x")[0], prop_line_betonline_value)
+                        line_matches_H = prop_line_underdog_H.split("x")[0] == str(prop_line_betonline_value)
+                        over_odds_better_than_under = False
+                        if isinstance(row1[f"{prop}_Over"], float) and math.isnan(row1[f"{prop}_Over"]):
+                            over_odds_better_than_under = False # no 'Over' odds, so skip checking over
+                        elif isinstance(row1[f"{prop}_Under"], float) and math.isnan(row1[f"{prop}_Under"]):
+                            over_odds_better_than_under = True # no 'Under' odds, so skip checking under
+                        elif row1[f"{prop}_Over"] < row1[f"{prop}_Under"]:
+                            over_odds_better_than_under = True # 'Over' odds are better than 'Under' odds
+                        print(line_matches_H, over_odds_better_than_under)
+                        if line_matches_H and over_odds_better_than_under:
                             # If the line from BetOnline matches the line from Underdog, and the 
                             # 'Over' odds are better than the 'Under' odds, then use the 'Over' line
                             found_match = True
                             prop_line_underdog = prop_line_underdog_H
                             odds_string = "Over"
                             odds = row1[f'{prop}_Over']
-                        elif prop_line_underdog_L.split("x")[0] == prop_line_betonline_value:
+
+                        line_matches_L = prop_line_underdog_L.split("x")[0] == prop_line_betonline_value
+                        under_odds_better_than_over = False
+                        if isinstance(row1[f"{prop}_Under"], float) and math.isnan(row1[f"{prop}_Under"]):
+                            under_odds_better_than_over = False # no 'Under' odds, so skip checking over
+                        elif isinstance(row1[f"{prop}_Over"], float) and math.isnan(row1[f"{prop}_Over"]):
+                            under_odds_better_than_over = True # no 'Under' odds, so skip checking under
+                        elif row1[f"{prop}_Under"] < row1[f"{prop}_Over"]:
+                            under_odds_better_than_over = True # 'Under' odds are better than 'Under' odds
+                        print(line_matches_L, under_odds_better_than_over)
+                        if line_matches_L and under_odds_better_than_over:
                             # Line from BetOnline matches the line from Underdog, and the 'Under' odds 
                             # are better than the 'Over' odds
                             found_match = True
@@ -146,7 +164,7 @@ def find_matches_nhl():
                     # No matching line found
                     None
     matching_lines = sorted(matching_lines, key=lambda k: k['odds'])
-    matching_lines = [line for line in matching_lines if line['odds'] <= -130]
+    matching_lines = [line for line in matching_lines if line['odds'] <= -120]
     with open(f'odds-lines-data/matching-lines/nhl/nhl_matching_lines_{current_date}.txt', 'w') as matching_lines_file:
         json.dump(matching_lines, matching_lines_file, indent=2)
     return matching_lines

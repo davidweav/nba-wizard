@@ -1,50 +1,5 @@
 {
-  "0": {
-    "event_id": "72a2e8363d8134ddb35952a866a5d169",
-    "date": "2024-02-19",
-    "time": "12:40:00",
-    "teams": [
-      "Buffalo Sabres",
-      "Anaheim Ducks"
-    ]
-  },
-  "1": {
-    "event_id": "06a49dbfd3f9d789b6e9c9863870ffa8",
-    "date": "2024-02-19",
-    "time": "13:00:00",
-    "teams": [
-      "Boston Bruins",
-      "Dallas Stars"
-    ]
-  },
-  "2": {
-    "event_id": "7c6dc26da1b08b4b2a95fb2f0f6b1c5a",
-    "date": "2024-02-19",
-    "time": "13:00:00",
-    "teams": [
-      "St Louis Blues",
-      "Toronto Maple Leafs"
-    ]
-  },
   "3": {
-    "event_id": "9d0090598eed053af202d85695f6c23d",
-    "date": "2024-02-19",
-    "time": "14:00:00",
-    "teams": [
-      "Minnesota Wild",
-      "Vancouver Canucks"
-    ]
-  },
-  "4": {
-    "event_id": "ca6bc64831ae288b5fa06fc0497a4e52",
-    "date": "2024-02-19",
-    "time": "15:30:00",
-    "teams": [
-      "Seattle Kraken",
-      "Detroit Red Wings"
-    ]
-  },
-  "5": {
     "event_id": "042439a1b0eb2b9d1e62e35a432ab113",
     "date": "2024-02-19",
     "time": "16:00:00",
@@ -53,7 +8,7 @@
       "Edmonton Oilers"
     ]
   },
-  "6": {
+  "4": {
     "event_id": "b471b50e684ddad54f976b4e7ce0e9fb",
     "date": "2024-02-19",
     "time": "16:00:00",
@@ -62,7 +17,7 @@
       "Winnipeg Jets"
     ]
   },
-  "7": {
+  "5": {
     "event_id": "30ae65f775d4dcf634ae0e8967554129",
     "date": "2024-02-19",
     "time": "16:00:00",
@@ -71,7 +26,7 @@
       "Vegas Golden Knights"
     ]
   },
-  "8": {
+  "6": {
     "event_id": "69b86ded30b59141a5661bdf925845df",
     "date": "2024-02-19",
     "time": "19:00:00",
@@ -80,7 +35,7 @@
       "Chicago Blackhawks"
     ]
   },
-  "9": {
+  "7": {
     "event_id": "26313e90650a8bbb15724ad731e6019e",
     "date": "2024-02-19",
     "time": "19:00:00",

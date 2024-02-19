@@ -17,12 +17,12 @@ def get_player_props_for_event(api_key, event_id, sport, desired_markets, bookma
     # Check if the request was successful
     if response.status_code == 401:
         print("Request quota has been reached for", api_key)
-        return False, "Request quota has been reached for the API key"
+        return False, "Request quota has been reached for the API key", None
     # Get the JSON data from the response
     player_props_data = response.json()
     # Check if the response contains the required data
     if not player_props_data.get('bookmakers'):
-        return False, "No bookmakers data found in the response"
+        return False, "No bookmakers data found in the response", None
     
     # Create a dictionary to store the player props data
     player_odds_dict = {}
@@ -31,6 +31,8 @@ def get_player_props_for_event(api_key, event_id, sport, desired_markets, bookma
         for market in player_props_data['bookmakers'][0]['markets']:
             market_key = market['key']
             market_type = market_key.split('_')[1].capitalize()
+            if "total_saves" in market_key:
+                market_type = "Saves"
             market_types.append(market_type)
         for market in player_props_data['bookmakers'][0]['markets']:
             market_key = market['key']
@@ -54,7 +56,7 @@ def get_player_props_for_event(api_key, event_id, sport, desired_markets, bookma
                 }
     except Exception as e:
         print(e)
-        return False, f"Error processing data: {str(e)}"
+        return False, f"Error processing data: {str(e)}", None
     return True, player_odds_dict, market_types
 
 def fetch_props_for_all_events(api_key, sport, desired_markets, bookmaker_key):
@@ -73,7 +75,6 @@ def fetch_props_for_all_events(api_key, sport, desired_markets, bookmaker_key):
             player_props_success, player_props, market_types = get_player_props_for_event(api_key, event_id, sport, desired_markets, bookmaker_key)
             if player_props_success == False:
                 return False
-            print(market_types)
             if player_props == False:
                 return False
             
@@ -98,10 +99,8 @@ def fetch_props_for_all_events(api_key, sport, desired_markets, bookmaker_key):
         for player_name, prop_data in full_player_odds_dict.items():
             row_data = {"Player": player_name}
             for prop_type, odds_data in prop_data.items():
-                print(f"Player: {player_name}, Prop Type: {prop_type}, Odds Data: {odds_data}")
-                print(odds_data)
                 for over_under in ["Over", "Under", "Line"]:
-                    column_name = f"{prop_type }_{over_under}"  # Remove 'player_' prefix
+                    column_name = f"{prop_type }_{over_under}" 
                     row_data[column_name] = odds_data[over_under]
             writer.writerow(row_data)
     return True
@@ -173,8 +172,9 @@ def fetch_nba_odds_and_lines(api_key):
 
 def fetch_nhl_odds_and_lines(api_key):
     sport_nhl = "icehockey_nhl"
-    bookmaker_key = "betonlineag"
+    betonline_bookmaker_key = "betonlineag"
+    caesars_bookmaker_key = "williamhill_us"
     desired_markets_nhl = [
-    "player_points", "player_total_saves", "player_shots_on_goal"
+    "player_points", "player_assists", "player_shots_on_goal", "player_goal_scorer_anytime", "player_total_saves"
     ]
-    return get_events_props_lines(api_key, sport_nhl, desired_markets_nhl, bookmaker_key)
+    return get_events_props_lines(api_key, sport_nhl, desired_markets_nhl, caesars_bookmaker_key)
