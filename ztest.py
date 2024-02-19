@@ -1,5 +1,4 @@
-from utils.find_matches import find_matches, get_odds_and_lines
-from utils.scrape_underdogs import do_logic
+from utils.find_matches import find_matches_nhl
 
 print("Testing...")
-find_matches()
+find_matches_nhl()

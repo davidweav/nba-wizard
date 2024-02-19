@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    
+    <div class="nav">
+        <h1 class="title" >NBA Wizard</h1>
+        <img src="{{ url_for('static', filename='nba_logo.png') }}" alt="basketball" width="150" height="150">
+    </div>
+    <p>We pick it you hit it!</p>
+    
+    <div class="button-row">
+        <button class="nav-button" id="getNBADataBtn">Fetch & Display Odds and Picks</button>
+    </div>
+    <div class="button-row">
+        <button class="nav-button" id="getNBABetOnlineOddsBtn">Fetch BetOnline Odds</button>
+        <button class="nav-button" id="getUnderdogNBAOddsBtn">Fetch Underdog Odds</button>
+    </div>
+    <div class="button-row">
+        <button class="nav-button" id="displayNBAOddsAndPicksBtn">Display Odds and Picks</button>
+    </div>
+
+    <ul class="data-holder" id="NBADataList"></ul>
+
+    <script>
+        $(document).ready(function() {
+            $('#getNBADataBtn').click(function() {
+                $.ajax({
+                    type: 'POST',
+                    url: '/get_nba_data',
+                    success: function(response) {
+                        displayNBAData(response);
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Error: ' + error);
+                    }
+                });
+            });
+
+            $('#getNBABetOnlineOddsBtn').click(function() {
+                $.ajax({
+                    type: 'POST',
+                    url: '/get_nba_betonline_odds',
+                    error: function(xhr, status, error) {
+                        alert('Error: ' + error);
+                    }
+                });
+            });
+
+            $('#getUnderdogNBAOddsBtn').click(function() {
+                $.ajax({
+                    type: 'POST',
+                    url: '/get_nba_underdog_lines',
+                    error: function(xhr, status, error) {
+                        alert('Error: ' + error);
+                    }
+                });
+            });
+
+            $('#displayNBAOddsAndPicksBtn').click(function() {
+                $.ajax({
+                    type: 'POST',
+                    url: '/display_nba_odds_and_picks',
+                    success: function(response) {
+                        displayNBAData(response);
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Error: ' + error);
+                    }
+                });
+            });
+
+            function displayNBAData(data) {
+                $('#NBADataList').empty(); // Clear previous data
+
+                if (data.length == 0) {
+                    $('#NBADataList').append('<li>No matches found. Try again later</li>')
+                };
+                
+                data.forEach(function(dictionary) {
+                    var listItem = $('<li>');
+                    var subList = $('<ul class="player">');
+                    subList.append('<li class="name">' + dictionary["name"] + '<li>')
+                    var playerdata = $('<ul class="line-and-prop">')
+                    playerdata.append('<li>' + dictionary["line"] + '</li>');
+                    playerdata.append('<li>' + dictionary["proptype"] + '</li>');
+                    playerdata.append('<li>' + dictionary["type"] + '</li>');
+                    playerdata.append('<li>' + dictionary["odds"] + '</li>');
+                    subList.append(playerdata);
+                    subList.append('<li class="implied-prob">' + dictionary["implied_probability"] + "% chance of hitting..." + '</li>');
+                    
+                    listItem.append(subList);
+                    $('#NBADataList').append(listItem);
+                });
+            }
+        });
+    </script>
+</body>
+
+
+</html>

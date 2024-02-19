@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <div class="nav">
+        <h1 class="title">NHL Wizard</h1>
+        <img src="{{ url_for('static', filename='nhl_logo.png') }}" alt="hockey sticks" width="150" height="150">
+    </div>
+    <p>We pick it you hit it!</p>
+
+    <div class="button-row">
+        <button class="nav-button" id="getNHLDataBtn">Fetch & Display Odds and Picks</button>
+    </div>
+    <div class="button-row">
+        <button class="nav-button" id="getBetOnlineNHLBtn">Fetch BetOnline Odds</button>
+        <button class="nav-button" id="getUnderdogNHLBtn">Fetch Underdog Odds</button>
+    </div>
+    <div class="button-row">
+        <button class="nav-button" id="displayNHLOddsAndPicksBtn">Display Odds and Picks</button>
+    </div>
+
+    <ul class="data-holder" id="NHLDataList"></ul>
+
+    <script>
+        $(document).ready(function () {
+            $('#getNHLDataBtn').click(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '/get_nhl_data',
+                    success: function (response) {
+                        displayNHLData(response);
+                    },
+                    error: function (xhr, status, error) {
+                        alert('Error: ' + error);
+                    }
+                });
+            });
+
+            $('#getBetOnlineNHLBtn').click(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '/get_betonline_nhl_odds',
+                    error: function (xhr, status, error) {
+                        alert('Error: ' + error);
+                    }
+                });
+            });
+
+            $('#getUnderdogNHLBtn').click(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '/get_underdog_nhl_lines',
+                    error: function (xhr, status, error) {
+                        alert('Error: ' + error);
+                    }
+                });
+            });
+
+            $('#displayNHLOddsAndPicksBtn').click(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '/display_nhl_odds_and_picks',
+                    success: function (response) {
+                        displayNHLData(response);
+                    },
+                    error: function (xhr, status, error) {
+                        alert('Error: ' + error);
+                    }
+                });
+            });
+
+            function displayNHLData(data) {
+                $('#NHLDataList').empty(); // Clear previous data
+
+                if (data.length == 0) {
+                    $('#NHLDataList').append('<li>No matches found. Try again later</li>')
+                };
+
+                data.forEach(function (dictionary) {
+                    var listItem = $('<li>');
+                    var subList = $('<ul class="player">');
+                    subList.append('<li class="name">' + dictionary["name"] + '<li>')
+                    var playerdata = $('<ul class="line-and-prop">')
+                    playerdata.append('<li>' + dictionary["line"] + '</li>');
+                    playerdata.append('<li>' + dictionary["proptype"] + '</li>');
+                    playerdata.append('<li>' + dictionary["type"] + '</li>');
+                    playerdata.append('<li>' + dictionary["odds"] + '</li>');
+                    subList.append(playerdata);
+                    subList.append('<li class="implied-prob">' + dictionary["implied_probability"] + "% chance of hitting..." + '</li>');
+
+                    listItem.append(subList);
+                    $('#NHLDataList').append(listItem);
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

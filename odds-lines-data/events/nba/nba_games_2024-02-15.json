@@ -1,0 +1,29 @@
+{
+  "0": {
+    "event_id": "3e1948cee1deb3cdf094bbb3c7b5a46a",
+    "date": "2024-02-15",
+    "time": "20:30:00",
+    "teams": [
+      "Memphis Grizzlies",
+      "Milwaukee Bucks"
+    ]
+  },
+  "1": {
+    "event_id": "0640a56cbd34ef6217b8c864bd01579a",
+    "date": "2024-02-15",
+    "time": "21:10:00",
+    "teams": [
+      "Utah Jazz",
+      "Golden State Warriors"
+    ]
+  },
+  "2": {
+    "event_id": "dd8cf5abfd32e6f0b2b4e527e82e6c87",
+    "date": "2024-02-15",
+    "time": "22:10:00",
+    "teams": [
+      "Portland Trail Blazers",
+      "Minnesota Timberwolves"
+    ]
+  }
+}
