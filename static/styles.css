@@ -35,10 +35,13 @@ ul {
     width: 80%;
     margin: 20px auto;
 }
-
 .player:hover{
     background-color: rgb(81, 109, 156);
 }
+.player.selected {
+    background-color: rgb(81, 109, 156);
+}
+
 p {
     font-size: 40px;
     color: rgb(255, 232, 202)
@@ -89,4 +92,23 @@ button:hover {
 
 button:active {
     background-color:rgba(123, 220, 220, 0.7);
+}
+
+.expected-value-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.expected-value-container button {
+    margin-right: 10px;
+}
+
+#expectedValue {
+    color: Black;
+    margin-top: 10px;
 }

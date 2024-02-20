@@ -60,6 +60,8 @@ def find_player_and_props(driver, player_prop_div):
     # Loop through each prop and extract the prop name and value
     for stat_line_element in stat_line_elements:
         prop = stat_line_element.find_element(By.CSS_SELECTOR, 'p').text
+        if "1st" in prop:
+            continue
         value, prop_name = prop.split(' ', 1)  # Split by the first space
         prop_choice_div = stat_line_element.find_element(By.CSS_SELECTOR, 'div.styles__overUnderOptionsWrapper__EMqt9')
         betting_option_buttons = prop_choice_div.find_elements(By.CSS_SELECTOR, "button")

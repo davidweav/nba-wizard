@@ -25,7 +25,15 @@
         <button class="nav-button" id="displayNHLOddsAndPicksBtn">Display Odds and Picks</button>
     </div>
 
-    <ul class="data-holder" id="NHLDataList"></ul>
+    <div id="expectedValueContainer" class="expected-value-container">
+        <button class="nav-button" id="calculateExpectedValueBtn">Calculate Expected Value</button>
+        <input type="number" id="betAmount" placeholder="Enter Amount to Bet">
+        <div id="expectedValue"></div>
+    </div>
+
+    <ul class="data-holder" id="NHLDataList">
+        <!-- List items will be dynamically added here -->
+    </ul>
 
     <script>
         $(document).ready(function () {
@@ -83,9 +91,10 @@
                 };
 
                 data.forEach(function (dictionary) {
-                    var listItem = $('<li>');
+                    var listItem = $('<li>')
                     var subList = $('<ul class="player">');
                     subList.append('<li class="name">' + dictionary["name"] + '<li>')
+
                     var playerdata = $('<ul class="line-and-prop">')
                     playerdata.append('<li>' + dictionary["line"] + '</li>');
                     playerdata.append('<li>' + dictionary["proptype"] + '</li>');
@@ -101,6 +110,51 @@
                     $('#NHLDataList').append(listItem);
                 });
             }
+
+            $(document).on('click', '.player', function () {
+                $(this).closest('.player').toggleClass('selected');
+            });
+
+            $('#moveSelectedItemsToTopBtn').click(function () {
+                var selectedItems = $('#NHLDataList input[type="checkbox"]:checked').closest('li');
+                selectedItems.prependTo('#NHLDataList')
+            });
+
+            $('#calculateExpectedValueBtn').click(function () {
+                var selectedItems = $('.player.selected');
+                var probabilities = [];
+                var multipliers = [];
+                var betAmount = parseFloat($('#betAmount').val());
+
+                selectedItems.each(function () {
+                    var currentItem = $(this);
+                    var probability = parseFloat(currentItem.find('.multiplier-and-probability li:nth-child(1)').text());
+                    var multiplier = parseFloat(currentItem.find('.multiplier-and-probability li:nth-child(2)').text());
+
+                    probabilities.push(probability);
+                    multipliers.push(multiplier);
+                });
+
+                var data = {
+                    'probabilities': probabilities,
+                    'multipliers': multipliers,
+                    'betAmount': betAmount
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/calculate_expected_value',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    success: function (response) {
+                        var expectedValue = response.expectedValue.toFixed(2);
+                        $('#expectedValue').text('Expected Value: ' + expectedValue);
+                    },
+                    error: function (xhr, status, error) {
+                        alert('Error: ' + error);
+                    }
+                });
+            });
         });
     </script>
 </body>

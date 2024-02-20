@@ -1,32 +1,5 @@
 {
-  "3": {
-    "event_id": "042439a1b0eb2b9d1e62e35a432ab113",
-    "date": "2024-02-19",
-    "time": "16:00:00",
-    "teams": [
-      "Arizona Coyotes",
-      "Edmonton Oilers"
-    ]
-  },
   "4": {
-    "event_id": "b471b50e684ddad54f976b4e7ce0e9fb",
-    "date": "2024-02-19",
-    "time": "16:00:00",
-    "teams": [
-      "Calgary Flames",
-      "Winnipeg Jets"
-    ]
-  },
-  "5": {
-    "event_id": "30ae65f775d4dcf634ae0e8967554129",
-    "date": "2024-02-19",
-    "time": "16:00:00",
-    "teams": [
-      "San Jose Sharks",
-      "Vegas Golden Knights"
-    ]
-  },
-  "6": {
     "event_id": "69b86ded30b59141a5661bdf925845df",
     "date": "2024-02-19",
     "time": "19:00:00",
@@ -35,7 +8,7 @@
       "Chicago Blackhawks"
     ]
   },
-  "7": {
+  "5": {
     "event_id": "26313e90650a8bbb15724ad731e6019e",
     "date": "2024-02-19",
     "time": "19:00:00",

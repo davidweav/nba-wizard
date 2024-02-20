@@ -113,7 +113,6 @@ def find_matches_nhl():
                     # Check if the Underdog line for user choice is missing
                     if prop_line_underdog_C == "nan":
                         # Check the higher and lower lines
-                        print(row1[f"{prop}_Over"], row1[f"{prop}_Under"], prop_line_underdog_H.split("x")[0], prop_line_underdog_L.split("x")[0], prop_line_betonline_value)
                         line_matches_H = prop_line_underdog_H.split("x")[0] == str(prop_line_betonline_value)
                         over_odds_better_than_under = False
                         if isinstance(row1[f"{prop}_Over"], float) and math.isnan(row1[f"{prop}_Over"]):
@@ -122,7 +121,6 @@ def find_matches_nhl():
                             over_odds_better_than_under = True # no 'Under' odds, so skip checking under
                         elif row1[f"{prop}_Over"] < row1[f"{prop}_Under"]:
                             over_odds_better_than_under = True # 'Over' odds are better than 'Under' odds
-                        print(line_matches_H, over_odds_better_than_under)
                         if line_matches_H and over_odds_better_than_under:
                             # If the line from BetOnline matches the line from Underdog, and the 
                             # 'Over' odds are better than the 'Under' odds, then use the 'Over' line
@@ -138,8 +136,7 @@ def find_matches_nhl():
                         elif isinstance(row1[f"{prop}_Over"], float) and math.isnan(row1[f"{prop}_Over"]):
                             under_odds_better_than_over = True # no 'Under' odds, so skip checking under
                         elif row1[f"{prop}_Under"] < row1[f"{prop}_Over"]:
-                            under_odds_better_than_over = True # 'Under' odds are better than 'Under' odds
-                        print(line_matches_L, under_odds_better_than_over)
+                            under_odds_better_than_over = True # 'Under' odds are better than 'Over' odds
                         if line_matches_L and under_odds_better_than_over:
                             # Line from BetOnline matches the line from Underdog, and the 'Under' odds 
                             # are better than the 'Over' odds
